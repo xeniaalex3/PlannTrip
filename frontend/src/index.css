@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@tailwindcss base;
+@tailwindcss components;
+@tailwindcss utilities;
+
+*{
+  min-width: 0;
+  font-family: 'Inter', sans-serif;
+}
