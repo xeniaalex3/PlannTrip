@@ -4,7 +4,7 @@ export default function CustomButton({ children, type }: CustomButtonProps) {
   return (
     <button
       type={type}
-      className="bg-lime-300 rounded-xl px-5 py-2 text-lime-950"
+      className="bg-lime-300 rounded-xl px-5 py-2 text-lime-950 font-medium flex items-center gap-2 hover:bg-lime-400"
     >
       {children}
     </button>
