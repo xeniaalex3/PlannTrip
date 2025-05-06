@@ -6,9 +6,9 @@ export default function Logo() {
       <img
         src={logo}
         alt="picture of logo"
-        className="h-9 w-9 object-contain"
+        className="h-9 w-9 object-contain align-middle"
       />
-      <h1 className="text-zinc-50 font-semibold text-3xl leading-none">
+      <h1 className="text-zinc-50 font-semibold text-3xl relative top-[-4px]">
         plannTrip
       </h1>
     </div>
