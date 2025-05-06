@@ -3,7 +3,7 @@ import Logo from '../components/ui/Logo/Logo'
 
 export default function Home() {
   return (
-    <div className="max-w-3xl mx-auto px-6 text-center space-y-10">
+    <div className="max-w-3xl mx-auto px-6 text-center space-y-10 ">
       <div className='space-y-5'>
       <Logo />
       <p className="text-zinc-300 text-lg">
