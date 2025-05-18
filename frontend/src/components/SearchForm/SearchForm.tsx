@@ -2,10 +2,13 @@ import InputWrapper from '../form/InputWrapper/InputWrapper'
 import CustomButton from '../ui/CustomButton/CustomButton'
 import { MapIcon, Calendar, ArrowRight } from 'lucide-react'
 
-export default function SearchForm() {
+interface SearchFormProps {
+  openGuestInput: () => void
+}
+
+export default function SearchForm({ openGuestInput }: SearchFormProps) {
   return (
-    <form
-      action=""
+    <div
       className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center w-[42rem] shadow-[var(--shadow)] gap-3"
     >
       <div className="flex items-center gap-2 flex-1">
@@ -26,10 +29,10 @@ export default function SearchForm() {
         />
       </div>
       <div className="w-px h-6 bg-zinc-600" />
-      <CustomButton type="submit">
+      <CustomButton type="submit" onClick={openGuestInput}>
         Continuer
         <ArrowRight className="size-5 text-lime-950" />
       </CustomButton>
-    </form>
+    </div>
   )
 }
