@@ -10,6 +10,10 @@ export default function Home() {
     setInputOpen(true)
   }
 
+  function closeGuestInput(){
+    setInputOpen(false);
+  }
+
   return (
     <div className="max-w-3xl mx-auto px-6 text-center space-y-10 ">
       <div className="space-y-5">
@@ -19,7 +23,7 @@ export default function Home() {
         </p>
       </div>
       <div className="space-y-4">
-        <SearchForm openGuestInput={openGuestInput} inputOpen={inputOpen}/>
+        <SearchForm openGuestInput={openGuestInput} inputOpen={inputOpen} closeGuestInput={closeGuestInput}/>
         {inputOpen && <GuestForm />}
       </div>
 

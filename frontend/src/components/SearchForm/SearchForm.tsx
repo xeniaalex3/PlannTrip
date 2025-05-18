@@ -3,13 +3,15 @@ import CustomButton from '../ui/CustomButton/CustomButton'
 import { MapIcon, Calendar, ArrowRight, Settings2 } from 'lucide-react'
 
 interface SearchFormProps {
-  openGuestInput: () => void;
-  inputOpen: boolean;
+  openGuestInput: () => void
+  closeGuestInput: () => void
+  inputOpen: boolean
 }
 
 export default function SearchForm({
   openGuestInput,
-  inputOpen
+  inputOpen,
+  closeGuestInput
 }: SearchFormProps) {
   return (
     <div className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center w-[42rem] shadow-[var(--shadow)] gap-3">
@@ -19,6 +21,7 @@ export default function SearchForm({
           type="text"
           placeholder="Où allez-vous?"
           className="bg-transparent text-lg placeholder-zinc-400 outline-none"
+          disabled={inputOpen}
         />
       </div>
 
@@ -28,11 +31,16 @@ export default function SearchForm({
           type="text"
           placeholder="Quand?"
           className="bg-transparent text-lg placeholder-zinc-400 w-24 outline-none"
+          disabled={inputOpen}
         />
       </div>
       <div className="w-px h-6 bg-zinc-600" />
       {inputOpen ? (
-        <button type="button" className='bg-zinc-800 rounded-xl px-5 py-2 text-zinc-400 font-medium flex items-center gap-2 hover:bg-zinc-700'>
+        <button
+          type="button"
+          className="bg-zinc-800 rounded-xl px-5 py-2 text-zinc-400 font-medium flex items-center gap-2 hover:bg-zinc-700"
+          onClick={closeGuestInput}
+        >
           Modifier lieu/date
           <Settings2 className="size-5 text-zinc-400" />
         </button>
