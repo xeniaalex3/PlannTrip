@@ -19,7 +19,7 @@ export default function Home() {
         </p>
       </div>
       <div className="space-y-4">
-        <SearchForm openGuestInput={openGuestInput} />
+        <SearchForm openGuestInput={openGuestInput} inputOpen={inputOpen}/>
         {inputOpen && <GuestForm />}
       </div>
 
