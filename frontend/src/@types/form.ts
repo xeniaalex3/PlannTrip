@@ -4,4 +4,5 @@ export interface InputWrapperProps extends InputHTMLAttributes<HTMLInputElement>
   placeholder: string;
   type: "text" | "date";
   className?: string;
+  disabled?: boolean;
 }
