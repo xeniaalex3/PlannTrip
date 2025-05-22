@@ -3,6 +3,7 @@ import SearchForm from '../components/SearchForm/SearchForm'
 import GuestForm from '../components/GuestForm/GuestForm'
 import Logo from '../components/ui/Logo/Logo'
 import ModalWrapper from '../components/ui/ModalWrapper/ModalWrapper'
+import { X } from 'lucide-react'
 
 export default function Home() {
   const [inputOpen, setInputOpen] = useState(false)
@@ -44,12 +45,26 @@ export default function Home() {
       </p>
       {guestModalOpen && (
         <ModalWrapper closeGuestModal={closeGuestModal}>
-          <div className="flex flex-col items-start py-5">
-            <h2 className='text-zinc-200'>Sélectionner les invités</h2>
-            <p className="text-zinc-400 text-sm">
-              Les invités recevront un courrier électronique confirmant leur
-              participation au voyage.
-            </p>
+          <div className="py-5">
+            <div className="space-y-2 flex flex-col items-start">
+              <h2 className="text-zinc-200 text-lg font-semibold">
+                Sélectionner les invités
+              </h2>
+              <p className="text-zinc-400 text-sm">
+                Les invités recevront un courrier électronique confirmant leur
+                participation au voyage.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2 my-5">
+              <div className="py-1.5 px-2.5 rounded-md bg-zinc-700 flex items-center gap-2">
+                <span className='text-zinc-300'>jessica.white44@yahoo.com</span>
+                <button type='button'>
+                  <X className='size-4 text-zinc-400'/>
+                </button>
+              </div>
+             <div className='w-full h-px bg-zinc-700 space-y-2'/>
+              
+            </div>
           </div>
         </ModalWrapper>
       )}
