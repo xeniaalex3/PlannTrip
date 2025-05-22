@@ -38,7 +38,7 @@ export default function SearchForm({
       {inputOpen ? (
         <button
           type="button"
-          className="bg-zinc-800 rounded-xl px-5 py-2 text-zinc-400 font-medium flex items-center gap-2 hover:bg-zinc-700"
+          className="bg-zinc-800 rounded-xl px-5 py-2 text-zinc-400 font-medium flex items-center gap-2 hover:bg-zinc-700 cursor-pointer"
           onClick={closeGuestInput}
         >
           Modifier lieu/date
