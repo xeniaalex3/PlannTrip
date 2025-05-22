@@ -14,8 +14,9 @@ export default function ModalWrapper({ children, closeGuestModal }: ModalWrapper
           onClick={closeGuestModal}
           className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-100 transition-colors"
           aria-label="close modal"
+          type="button"
         >
-          <X size={20} />
+          <X size={20} className="size-5 text-zinc-400 cursor-pointer"/>
         </button>
        {children}
      </div>
