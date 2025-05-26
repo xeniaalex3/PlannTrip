@@ -6,6 +6,7 @@ import ModalWrapper from '../components/ui/ModalWrapper/ModalWrapper'
 import { X, AtSign, Plus } from 'lucide-react'
 import InputWrapper from '../components/form/InputWrapper/InputWrapper'
 import CustomButton from '../components/ui/CustomButton/CustomButton'
+import { toast } from 'react-toastify'
 
 export default function Home() {
   const [inputOpen, setInputOpen] = useState(false)
@@ -27,13 +28,20 @@ export default function Home() {
       return
     }
 
-    if(emailsToInvite.includes(email)){
+    if (emailsToInvite.includes(email)) {
+      toast.error('Cet e-mail est déjà dans la liste des invités.')
       return
     }
 
     setEmailsToInvite([...emailsToInvite, email])
 
-    event.currentTarget.reset();
+    event.currentTarget.reset()
+  }
+
+  function removeEmailsFromInvites(emailToRemove: string) {
+    const newEmailList = emailsToInvite.filter(email => email !== emailToRemove)
+
+    setEmailsToInvite(newEmailList)
   }
 
   return (
@@ -86,7 +94,10 @@ export default function Home() {
                   >
                     <span className="text-zinc-300">{email}</span>
                     <button type="button">
-                      <X className="size-4 text-zinc-400" />
+                      <X
+                        className="size-4 text-zinc-400 cursor-pointer"
+                        onClick={() => removeEmailsFromInvites(email)}
+                      />
                     </button>
                   </div>
                 )
