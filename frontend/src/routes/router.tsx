@@ -1,11 +1,16 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from 'react-router-dom'
 import Root from './Root'
+import TripDetails from '../pages/TripDetails/TripDetails'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Root />,
   },
-]);
+  {
+     path: '/trips/:tripId',
+    element: <TripDetails />,
+  }
+])
 
-export default router;
+export default router
