@@ -4,7 +4,7 @@ import InputWrapper from '../form/InputWrapper/InputWrapper'
 import CustomButton from '../ui/CustomButton/CustomButton'
 
 interface ModalConfirmationTripProps {
-  closeModalConfirmation: () => void
+  closeModalConfirmation: () => void;
 }
 
 export default function ModalConfirmationTrip({
