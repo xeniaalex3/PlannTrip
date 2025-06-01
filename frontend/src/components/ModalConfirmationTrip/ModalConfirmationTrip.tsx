@@ -1,7 +1,10 @@
 import ModalWrapper from '../ui/ModalWrapper/ModalWrapper'
+import { User, Mail } from 'lucide-react'
+import InputWrapper from '../form/InputWrapper/InputWrapper'
+import CustomButton from '../ui/CustomButton/CustomButton'
 
 interface ModalConfirmationTripProps {
-  closeModalConfirmation: () => void;
+  closeModalConfirmation: () => void
 }
 
 export default function ModalConfirmationTrip({
@@ -13,11 +16,44 @@ export default function ModalConfirmationTrip({
         <h2 className="text-zinc-200 text-lg font-semibold">
           Confirmer la création du voyage
         </h2>
-        <p className="text-zinc-400 text-sm">
-          Les invités recevront un courrier électronique confirmant leur
-          participation au voyage.
+        <p className="text-zinc-400 text-sm text-left">
+          Pour réaliser votre voyage à{' '}
+          <span className="font-semibold text-zinc-100">
+            Florianópolis, Brésil
+          </span>{' '}
+          , du{' '}
+          <span className="font-semibold text-zinc-100">
+            16 au 27 août 2024
+          </span>
+          , remplissez vos coordonnées ci-dessous :
         </p>
       </div>
+      <form
+        action=""
+        className="flex flex-col items-center  mt-4 space-y-3"
+      >
+        <div className="flex items-center gap-2 bg-zinc-950 h-14 w-full px-2 rounded-lg">
+          <User className="text-zinc-400 size-5" />
+          <InputWrapper
+            type="text"
+            name="name"
+            placeholder="Votre nom complet"
+            className="bg-transparent text-lg placeholder-zinc-400 outline-none w-90"
+          />
+        </div>
+        <div className="flex items-center gap-2 bg-zinc-950 h-14 w-full px-2 rounded-lg">
+          <Mail className="text-zinc-400 size-5" />
+          <InputWrapper
+            type="email"
+            name="email"
+            placeholder="Votre e-mail personnel"
+            className="bg-transparent text-lg placeholder-zinc-400 outline-none w-90"
+          />
+        </div>
+         <CustomButton type="submit" fullWidth>
+            Confirmer la création du voyage
+          </CustomButton>
+      </form>
     </ModalWrapper>
   )
 }
