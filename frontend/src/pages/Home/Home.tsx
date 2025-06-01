@@ -1,23 +1,23 @@
 import { useState } from 'react'
 import SearchForm from '../../components/SearchForm/SearchForm'
 import GuestForm from '../../components/GuestForm/GuestForm'
-import ModalGuestInvite from '../../components/ModalGuestInvite/ModalGuestInvite'
+import InviteGuestModal from '../../components/InviteGuestModal/InviteGuestModal'
 import Footer from '../Footer/Footer'
 import Header from '../Header/Header'
-import ModalConfirmationTrip from '../../components/ModalConfirmationTrip/ModalConfirmationTrip'
+import ConfirmTripModal from '../../components/ConfirmTripModal/ConfirmTripModal'
 
 export default function Home() {
   const [inputOpen, setInputOpen] = useState(false)
   const [guestModalOpen, setGuestModalOpen] = useState(false)
-  const [modalConfirmation, setModalConfirmation] = useState(false);
+  const [confirmModal, setConfirmModal] = useState(false)
   const [emailsToInvite, setEmailsToInvite] = useState<string[]>([])
 
   const openGuestInput = () => setInputOpen(true)
   const closeGuestInput = () => setInputOpen(false)
   const openGuestModal = () => setGuestModalOpen(true)
   const closeGuestModal = () => setGuestModalOpen(false)
-  const openGuestModalConfirmation = () => setModalConfirmation(true);
-  const closeModalConfirmation = () => setModalConfirmation(false);
+  const openGuestModalConfirmation = () => setConfirmModal(true)
+  const closeModalConfirmation = () => setConfirmModal(false)
 
   return (
     <div className="max-w-3xl mx-auto px-6 text-center space-y-10 ">
@@ -28,26 +28,26 @@ export default function Home() {
           inputOpen={inputOpen}
           closeGuestInput={closeGuestInput}
         />
-        {inputOpen && <GuestForm 
-        openGuestModal={openGuestModal} 
-        guestsCount={emailsToInvite.length} 
-        openGuestModalConfirmation={openGuestModalConfirmation}
-        />}
+        {inputOpen && (
+          <GuestForm
+            openGuestModal={openGuestModal}
+            guestsCount={emailsToInvite.length}
+            openGuestModalConfirmation={openGuestModalConfirmation}
+          />
+        )}
       </div>
       <Footer />
 
       {guestModalOpen && (
-        <ModalGuestInvite
+        <InviteGuestModal
           closeGuestModal={closeGuestModal}
           emailsToInvite={emailsToInvite}
           setEmailsToInvite={setEmailsToInvite}
         />
       )}
 
-      {modalConfirmation && (
-        <ModalConfirmationTrip 
-        closeModalConfirmation={closeModalConfirmation}
-        />
+      {confirmModal && (
+        <ConfirmTripModal closeModalConfirmation={closeModalConfirmation} />
       )}
     </div>
   )

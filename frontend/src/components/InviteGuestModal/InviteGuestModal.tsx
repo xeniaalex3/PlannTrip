@@ -5,17 +5,18 @@ import InputWrapper from '../form/InputWrapper/InputWrapper'
 import CustomButton from '../ui/CustomButton/CustomButton'
 import { toast } from 'react-toastify'
 
-interface ModalGuestInviteProps {
+interface InviteGuestModalProps {
   closeGuestModal: () => void
   emailsToInvite: string[]
   setEmailsToInvite: Dispatch<React.SetStateAction<string[]>>
 }
 
-export default function ModalGuestInvite({
+export default function InviteGuestModal({
   closeGuestModal,
   emailsToInvite,
   setEmailsToInvite
-}: ModalGuestInviteProps) {
+}: InviteGuestModalProps) {
+  
   function handleAddNewEmailToInvite(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
