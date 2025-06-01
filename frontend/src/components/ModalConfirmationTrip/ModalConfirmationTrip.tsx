@@ -1,15 +1,32 @@
+import { type FormEvent } from 'react'
 import ModalWrapper from '../ui/ModalWrapper/ModalWrapper'
 import { User, Mail } from 'lucide-react'
 import InputWrapper from '../form/InputWrapper/InputWrapper'
 import CustomButton from '../ui/CustomButton/CustomButton'
+import { toast } from 'react-toastify'
 
 interface ModalConfirmationTripProps {
-  closeModalConfirmation: () => void;
+  closeModalConfirmation: () => void
 }
 
 export default function ModalConfirmationTrip({
   closeModalConfirmation
 }: ModalConfirmationTripProps) {
+  function handleSubmitConfirmationTrip(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    const formData = new FormData(event.currentTarget)
+    const name = formData.get('name') as string
+    const email = formData.get('email') as string
+
+    if (!name || !email) {
+      toast.error('Veuillez remplir tous les champs.')
+      return
+    }
+
+    event.currentTarget.reset()
+  }
+
   return (
     <ModalWrapper onClick={closeModalConfirmation}>
       <div className="space-y-2 flex flex-col items-start">
@@ -31,6 +48,7 @@ export default function ModalConfirmationTrip({
       <form
         action=""
         className="flex flex-col items-center  mt-4 space-y-3"
+        onSubmit={handleSubmitConfirmationTrip}
       >
         <div className="flex items-center gap-2 bg-zinc-950 h-14 w-full px-2 rounded-lg">
           <User className="text-zinc-400 size-5" />
@@ -50,9 +68,9 @@ export default function ModalConfirmationTrip({
             className="bg-transparent text-lg placeholder-zinc-400 outline-none w-90"
           />
         </div>
-         <CustomButton type="submit" fullWidth>
-            Confirmer la création du voyage
-          </CustomButton>
+        <CustomButton type="submit" fullWidth>
+          Confirmer la création du voyage
+        </CustomButton>
       </form>
     </ModalWrapper>
   )

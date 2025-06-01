@@ -16,6 +16,7 @@ export default function ModalGuestInvite({
   emailsToInvite,
   setEmailsToInvite
 }: ModalGuestInviteProps) {
+  
   function handleAddNewEmailToInvite(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
