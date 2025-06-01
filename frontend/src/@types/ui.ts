@@ -4,4 +4,5 @@ export interface CustomButtonProps {
   children: ReactNode;
   type: "submit" | "button" | "reset"
   onClick?: () => void;
+  fullWidth?: boolean;
 }
