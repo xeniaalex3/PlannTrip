@@ -1,7 +1,7 @@
 import { type Dispatch, type FormEvent } from 'react'
 import ModalWrapper from '../ui/ModalWrapper/ModalWrapper'
 import { X, AtSign, Plus } from 'lucide-react'
-import InputWrapper from '../form/InputWrapper/InputWrapper'
+import InputWrapper from '../ui/form/InputWrapper/InputWrapper'
 import CustomButton from '../ui/CustomButton/CustomButton'
 import { toast } from 'react-toastify'
 
@@ -16,7 +16,6 @@ export default function InviteGuestModal({
   emailsToInvite,
   setEmailsToInvite
 }: InviteGuestModalProps) {
-  
   function handleAddNewEmailToInvite(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
