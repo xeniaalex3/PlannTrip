@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom'
 import logo from '../../../assets/images/Vector.png'
 
 export default function Logo() {
   return (
-    <div className="flex items-center justify-center gap-2">
+    <Link to="/" className="flex items-center justify-center gap-2">
       <img
         src={logo}
         alt="picture of logo"
@@ -11,6 +12,6 @@ export default function Logo() {
       <h1 className="text-zinc-50 font-semibold text-3xl relative top-[-4px]">
         plannTrip
       </h1>
-    </div>
+    </Link>
   )
 }

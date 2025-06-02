@@ -28,7 +28,7 @@ export default function ConfirmTripModal({
       return
     }
 
-    navigate("/trips/12");
+    navigate("/confirm-trip");
 
     event.currentTarget.reset()
   }

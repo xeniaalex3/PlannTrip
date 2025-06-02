@@ -2,8 +2,6 @@ import { useState } from 'react'
 import SearchForm from '../../components/steps/SearchForm/SearchForm'
 import GuestForm from '../../components/steps/GuestForm/GuestForm'
 import InviteGuestModal from '../../components/InviteGuestModal/InviteGuestModal'
-import Footer from '../Footer/Footer'
-import Header from '../Header/Header'
 import ConfirmTripModal from '../../components/ConfirmTripModal/ConfirmTripModal'
 
 export default function Home() {
@@ -20,8 +18,7 @@ export default function Home() {
   const closeModalConfirmation = () => setConfirmModal(false)
 
   return (
-    <div className="max-w-3xl mx-auto px-6 text-center space-y-10 ">
-      <Header />
+    <>
       <div className="space-y-4">
         <SearchForm
           openGuestInput={openGuestInput}
@@ -36,7 +33,6 @@ export default function Home() {
           />
         )}
       </div>
-      <Footer />
 
       {guestModalOpen && (
         <InviteGuestModal
@@ -49,6 +45,6 @@ export default function Home() {
       {confirmModal && (
         <ConfirmTripModal closeModalConfirmation={closeModalConfirmation} />
       )}
-    </div>
+    </>
   )
 }
