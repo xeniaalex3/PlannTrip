@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import SearchForm from '../../components/SearchForm/SearchForm'
-import GuestForm from '../../components/GuestForm/GuestForm'
+import SearchForm from '../../components/steps/SearchForm/SearchForm'
+import GuestForm from '../../components/steps/GuestForm/GuestForm'
 import InviteGuestModal from '../../components/InviteGuestModal/InviteGuestModal'
 import Footer from '../Footer/Footer'
 import Header from '../Header/Header'

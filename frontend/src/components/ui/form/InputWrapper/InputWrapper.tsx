@@ -1,4 +1,4 @@
-import type { InputWrapperProps } from "../../../@types/form"
+import type { InputWrapperProps } from "../../../../@types/form"
 
 export default function InputWrapper({ placeholder, type, name, className, disabled}: InputWrapperProps){
   return(

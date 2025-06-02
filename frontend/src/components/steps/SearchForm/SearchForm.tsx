@@ -1,5 +1,5 @@
-import InputWrapper from '../form/InputWrapper/InputWrapper'
-import CustomButton from '../ui/CustomButton/CustomButton'
+import InputWrapper from '../../ui/form/InputWrapper/InputWrapper'
+import CustomButton from '../../ui/CustomButton/CustomButton'
 import { MapIcon, Calendar, ArrowRight, Settings2 } from 'lucide-react'
 
 interface SearchFormProps {
