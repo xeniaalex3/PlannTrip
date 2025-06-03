@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import SearchForm from '../../components/steps/SearchForm/SearchForm'
 import GuestForm from '../../components/steps/GuestForm/GuestForm'
-import InviteGuestModal from '../../components/InviteGuestModal/InviteGuestModal'
-import ConfirmTripModal from '../../components/ConfirmTripModal/ConfirmTripModal'
+import InviteGuestModal from '../../components/Modals/InviteGuestModal/InviteGuestModal'
+import ConfirmTripModal from '../../components/Modals/ConfirmTripModal/ConfirmTripModal'
 import type { DateRange } from "react-day-picker";
 
 export default function Home() {

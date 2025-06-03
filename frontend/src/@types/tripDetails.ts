@@ -1,5 +1,8 @@
 export interface LinksContentProps {
 title: string;
-description: string;
 link: string
+}
+
+export interface CreateLinkModalProps {
+  handleCloseLinkModal: () => void;
 }

@@ -1,16 +1,22 @@
+import { useState } from 'react'
 import {
   Calendar,
   MapPin,
   Settings2,
   Plus,
   CircleCheck,
-  CircleDashed,
+  CircleDashed
 } from 'lucide-react'
 import CustomButton from '../../components/ui/CustomButton/CustomButton'
-import LinksContent from './LinksContainer/LinksContent'
-
+import LinksContent from './LinksContainer/LinksContent/LinksContent'
+import CreateLinkModal from './LinksContainer/CreateLinkModal/CreateLinkModal'
 
 export default function TripDetails() {
+  const [openLinkModal, setOpenLinkModal] = useState(false)
+
+  const handleOpenLinkModal = () => setOpenLinkModal(true)
+  const handleCloseLinkModal = () => setOpenLinkModal(false)
+
   return (
     <div className="max-w-6xl px-6 py-10 mx-auto space-y-8">
       <div className="px-4 h-16 rounded-xl bg-zinc-900 shadow-[var(--shadow)] flex items-center justify-between">
@@ -24,12 +30,9 @@ export default function TripDetails() {
             <span className="text-lg text-zinc-200">17 à 23 de Agosto</span>
           </div>
           <div className="w-px h-6 bg-zinc-600" />
-          <CustomButton
-            type="button"
-            color='gray'
-          >
+          <CustomButton type="button" color="gray">
             Modifier lieu/date
-            <Settings2 className="size-5 text-zinc-400" />
+            <Settings2 className="size-5 text-zinc-200" />
           </CustomButton>
         </div>
       </div>
@@ -81,25 +84,36 @@ export default function TripDetails() {
 
         <div className="w-80 space-y-6">
           <div className="space-y-6">
-            <h3 className="text-zinc-50 font-semibold text-xl">
+            <h3 className="text-zinc-100 font-semibold text-lg">
               Liens importants
             </h3>
-            <LinksContent 
-            description='Link airbnb'
-            title="Réservation d'AirBnB"
-            link='https://www.airbnb.com.br/rooms/104700011'
+            <LinksContent
+              title="Réservation d'AirBnB"
+              link="https://www.airbnb.com.br/rooms/104700011"
             />
-            <LinksContent 
-            description='link'
-            title='Règlement intérieur'
-            link='https://www.notion.com/pages/1047000112'
+            <LinksContent
+              title="Règlement intérieur"
+              link="https://www.notion.com/pages/1047000112"
             />
-           
+            <CustomButton
+              type="button"
+              color="gray"
+              fullWidth
+              onClick={handleOpenLinkModal}
+            >
+              <Plus className="size-5 text-zinc-200" />
+              Enregistrer un nouveau lien
+            </CustomButton>
           </div>
           <div className="w-full h-px bg-zinc-700" />
-          <div></div>
+          <div className="space-y-6">
+            <h3 className="text-zinc-100 font-semibold text-lg">Invités</h3>
+          </div>
         </div>
       </main>
+      {openLinkModal && (
+        <CreateLinkModal handleCloseLinkModal={handleCloseLinkModal} />
+      )}
     </div>
   )
 }

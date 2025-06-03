@@ -16,7 +16,7 @@ export default function CustomButton({
       colorCss = "bg-lime-300 text-lime-950 hover:bg-lime-400";
       break;
     case "gray":
-      colorCss = "bg-zinc-800 text-zinc-400 hover:bg-zinc-700";
+      colorCss = "bg-zinc-800 text-zinc-200 hover:bg-zinc-700";
       break;
     default:
       colorCss = "bg-lime-300 text-lime-950 hover:bg-lime-400";

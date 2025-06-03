@@ -75,7 +75,7 @@ export default function SearchForm({
       {inputOpen ? (
         <CustomButton type="button" color="gray" onClick={closeGuestInput}>
           Modifier lieu/date
-          <Settings2 className="size-5 text-zinc-400" />
+          <Settings2 className="size-5 text-zinc-200" />
         </CustomButton>
       ) : (
         <CustomButton type="submit" onClick={openGuestInput}>
