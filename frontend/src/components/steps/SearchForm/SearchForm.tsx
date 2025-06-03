@@ -31,13 +31,13 @@ export default function SearchForm({
     setIsDatePickerOpen(false)
   }
 
- const displayedDate =
-  eventStartAndEndDates?.from && eventStartAndEndDates?.to
-    ? `${format(eventStartAndEndDates.from, 'dd/MM/yyyy')} - ${format(
-        eventStartAndEndDates.to,
-        'dd/MM/yyyy'
-      )}`
-    : null;
+  const displayedDate =
+    eventStartAndEndDates?.from && eventStartAndEndDates?.to
+      ? `${format(eventStartAndEndDates.from, 'dd/MM/yyyy')} - ${format(
+          eventStartAndEndDates.to,
+          'dd/MM/yyyy'
+        )}`
+      : null
 
   return (
     <div className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center w-[42rem] shadow-[var(--shadow)] gap-3">
@@ -57,8 +57,8 @@ export default function SearchForm({
           type="text"
           placeholder="Quand?"
           className={`bg-transparent outline-none w-24 placeholder-zinc-400 text-lg ${
-    displayedDate ? 'text-sm text-zinc-300 w-[178px]' : ''
-  }`}
+            displayedDate ? 'text-sm text-zinc-300 w-[178px]' : ''
+          }`}
           disabled={inputOpen}
           onClick={openDatePicker}
           value={displayedDate ?? undefined}
@@ -73,14 +73,10 @@ export default function SearchForm({
       )}
       <div className="w-px h-6 bg-zinc-600" />
       {inputOpen ? (
-        <button
-          type="button"
-          className="bg-zinc-800 rounded-xl px-5 py-2 text-zinc-400 font-medium flex items-center gap-2 hover:bg-zinc-700 cursor-pointer"
-          onClick={closeGuestInput}
-        >
+        <CustomButton type="button" color="gray" onClick={closeGuestInput}>
           Modifier lieu/date
           <Settings2 className="size-5 text-zinc-400" />
-        </button>
+        </CustomButton>
       ) : (
         <CustomButton type="submit" onClick={openGuestInput}>
           Continuer
