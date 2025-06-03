@@ -1,8 +1,8 @@
 import { type FormEvent } from 'react'
-import ModalWrapper from '../ui/ModalWrapper/ModalWrapper'
+import ModalWrapper from '../../ui/ModalWrapper/ModalWrapper'
 import { User, Mail } from 'lucide-react'
-import InputWrapper from '../ui/form/InputWrapper/InputWrapper'
-import CustomButton from '../ui/CustomButton/CustomButton'
+import InputWrapper from '../../ui/form/InputWrapper/InputWrapper'
+import CustomButton from '../../ui/CustomButton/CustomButton'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router'
 
@@ -13,8 +13,7 @@ interface ConfirmTripModalProps {
 export default function ConfirmTripModal({
   closeModalConfirmation
 }: ConfirmTripModalProps) {
-
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   function handleSubmitConfirmationTrip(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -28,11 +27,10 @@ export default function ConfirmTripModal({
       return
     }
 
-    navigate("/confirm-trip");
+    navigate('/confirm-trip')
 
     event.currentTarget.reset()
   }
-
 
   return (
     <ModalWrapper onClick={closeModalConfirmation}>

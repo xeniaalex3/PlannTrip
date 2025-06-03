@@ -5,4 +5,5 @@ export interface CustomButtonProps {
   type: "submit" | "button" | "reset"
   onClick?: () => void;
   fullWidth?: boolean;
+  color?: "yellow" | "gray";
 }
