@@ -14,7 +14,7 @@ export default function ConfirmTrip() {
       <div className="max-w-3xl mx-auto px-6 text-center space-y-10 ">
         <Logo />
         <div className="space-y-4 shadow-[var(--shadow)] bg-zinc-900 px-6 py-8 rounded-lg">
-          <h3 className="text-zinc-150 font-medium text-xl">
+          <h3 className="text-zinc-100 font-medium text-xl">
             Votre voyage a été créé avec succès !{' '}
           </h3>
           <p className="text-zinc-400 text-base">

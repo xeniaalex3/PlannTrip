@@ -1,6 +1,6 @@
 import type { InputWrapperProps } from "../../../../@types/form"
 
-export default function InputWrapper({ placeholder, type, name, className, disabled}: InputWrapperProps){
+export default function InputWrapper({ placeholder, type, name, className, disabled, value, onClick}: InputWrapperProps){
   return(
     <input 
     type={type} 
@@ -8,6 +8,8 @@ export default function InputWrapper({ placeholder, type, name, className, disab
     className={className}
     disabled={disabled}
     name={name}
+    value={value}
+    onClick={onClick}
     />
   )
 }
