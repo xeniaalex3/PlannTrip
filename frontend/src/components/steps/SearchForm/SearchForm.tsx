@@ -1,18 +1,44 @@
+import { useState } from 'react'
 import InputWrapper from '../../ui/form/InputWrapper/InputWrapper'
 import CustomButton from '../../ui/CustomButton/CustomButton'
 import { MapIcon, Calendar, ArrowRight, Settings2 } from 'lucide-react'
+import { type DateRange } from 'react-day-picker'
+import DatePicker from '../../ui/DatePicket/DatePicket'
+import { format } from 'date-fns'
 
 interface SearchFormProps {
   openGuestInput: () => void
   closeGuestInput: () => void
   inputOpen: boolean
+  setEventStartAndEndDates: (dates: DateRange | undefined) => void
+  eventStartAndEndDates: DateRange | undefined
 }
 
 export default function SearchForm({
   openGuestInput,
   inputOpen,
-  closeGuestInput
+  closeGuestInput,
+  setEventStartAndEndDates,
+  eventStartAndEndDates
 }: SearchFormProps) {
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
+
+  function openDatePicker() {
+    setIsDatePickerOpen(true)
+  }
+
+  function closeDatePicker() {
+    setIsDatePickerOpen(false)
+  }
+
+ const displayedDate =
+  eventStartAndEndDates?.from && eventStartAndEndDates?.to
+    ? `${format(eventStartAndEndDates.from, 'dd/MM/yyyy')} - ${format(
+        eventStartAndEndDates.to,
+        'dd/MM/yyyy'
+      )}`
+    : null;
+
   return (
     <div className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center w-[42rem] shadow-[var(--shadow)] gap-3">
       <div className="flex items-center gap-2 flex-1">
@@ -30,10 +56,21 @@ export default function SearchForm({
         <InputWrapper
           type="text"
           placeholder="Quand?"
-          className="bg-transparent text-lg placeholder-zinc-400 w-24 outline-none"
+          className={`bg-transparent outline-none w-24 placeholder-zinc-400 text-lg ${
+    displayedDate ? 'text-sm text-zinc-300 w-[178px]' : ''
+  }`}
           disabled={inputOpen}
+          onClick={openDatePicker}
+          value={displayedDate ?? undefined}
         />
       </div>
+      {isDatePickerOpen && (
+        <DatePicker
+          eventStartAndEndDates={eventStartAndEndDates}
+          setEventStartAndEndDates={setEventStartAndEndDates}
+          closeDatePicker={closeDatePicker}
+        />
+      )}
       <div className="w-px h-6 bg-zinc-600" />
       {inputOpen ? (
         <button

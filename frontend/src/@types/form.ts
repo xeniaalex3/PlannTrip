@@ -6,4 +6,6 @@ export interface InputWrapperProps extends InputHTMLAttributes<HTMLInputElement>
   className?: string;
   disabled?: boolean;
   name?: string;
+   value?: string
+  onClick?: () => void
 }
