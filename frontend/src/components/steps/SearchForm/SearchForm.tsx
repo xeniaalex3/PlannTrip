@@ -6,7 +6,7 @@ import { type DateRange } from 'react-day-picker'
 import DatePicker from '../../ui/DatePicket/DatePicket'
 import { format } from 'date-fns'
 
-interface SearchFormProps {
+export interface SearchFormProps {
   openGuestInput: () => void
   closeGuestInput: () => void
   inputOpen: boolean
@@ -51,7 +51,7 @@ export default function SearchForm({
         />
       </div>
 
-      <div className="flex items-center gap-2">
+      <button className="flex items-center gap-2" onClick={openDatePicker}>
         <Calendar className="text-zinc-400 size-5" />
         <InputWrapper
           type="text"
@@ -60,15 +60,15 @@ export default function SearchForm({
             displayedDate ? 'text-sm text-zinc-300 w-[178px]' : ''
           }`}
           disabled={inputOpen}
-          onClick={openDatePicker}
           value={displayedDate ?? undefined}
         />
-      </div>
+      </button>
       {isDatePickerOpen && (
         <DatePicker
           eventStartAndEndDates={eventStartAndEndDates}
           setEventStartAndEndDates={setEventStartAndEndDates}
           closeDatePicker={closeDatePicker}
+          mode="range"
         />
       )}
       <div className="w-px h-6 bg-zinc-600" />
