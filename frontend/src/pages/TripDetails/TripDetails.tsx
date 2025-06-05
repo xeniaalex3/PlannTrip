@@ -9,12 +9,19 @@ import CustomButton from '../../components/ui/CustomButton/CustomButton'
 import LinksContent from './LinksContainer/LinksContent/LinksContent'
 import CreateLinkModal from './LinksContainer/CreateLinkModal/CreateLinkModal'
 import ActivityContent from './ActivitiesContainer/ActivityContent/ActivityContent'
+import CreateActivityModal from './ActivitiesContainer/CreateActivityModal/CreateActivityModal'
 
 export default function TripDetails() {
   const [openLinkModal, setOpenLinkModal] = useState(false)
+  const [openActivityModal, setOpenActivityModal] = useState(false)
 
+  // link
   const handleOpenLinkModal = () => setOpenLinkModal(true)
   const handleCloseLinkModal = () => setOpenLinkModal(false)
+  // activity
+  const handleOpenActivityModal = () => setOpenActivityModal(true)
+  const handleCloseActivityModal = () => setOpenActivityModal(false)
+
 
   return (
     <div className="max-w-6xl px-6 py-10 mx-auto space-y-8">
@@ -39,7 +46,7 @@ export default function TripDetails() {
         <div className="flex-1 space-y-6">
           <div className="flex items-center justify-between">
             <h2 className="text-3xl font-semibold text-zinc-50">Activités</h2>
-            <CustomButton type="button">
+            <CustomButton type="button" onClick={handleOpenActivityModal}>
               <Plus className="size-5 text-lime-950" />
               Enregistrer l'activité
             </CustomButton>
@@ -80,6 +87,10 @@ export default function TripDetails() {
       </main>
       {openLinkModal && (
         <CreateLinkModal handleCloseLinkModal={handleCloseLinkModal} />
+      )}
+
+      {openActivityModal && (
+        <CreateActivityModal handleCloseActivityModal={handleCloseActivityModal} />
       )}
     </div>
   )

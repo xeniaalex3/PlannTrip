@@ -34,7 +34,7 @@ export default function CreateLinkModal({
             <div className="flex items-center gap-2 bg-zinc-950 h-14 w-full px-2 rounded-lg">
               <Link2 className="text-zinc-400 size-5" />
               <InputWrapper
-                type="email"
+                type="text"
                 name="link"
                 placeholder="URL"
                 className="bg-transparent text-lg placeholder-zinc-400 outline-none w-90"

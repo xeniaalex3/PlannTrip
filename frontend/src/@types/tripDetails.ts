@@ -18,3 +18,7 @@ export interface ActivityContentProps {
   weekDay: string
   activities: Activity[]
 }
+
+export interface CreateActivityModalProps {
+  handleCloseActivityModal: () => void;
+}
