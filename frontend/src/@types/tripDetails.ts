@@ -8,13 +8,21 @@ export interface CreateLinkModalProps {
 }
 
 export interface Activity {
+  id: number
   title: string
   time: string
+  date: string
   done: boolean
 }
 
 export interface ActivityContentProps {
-  dayLabel: string
-  weekDay: string
-  activities: Activity[]
+  activities: Activity[];
+  onToggleDone: (index: number) => void
+}
+
+export interface CreateActivityModalProps {
+  handleCloseActivityModal: () => void;
+  eventStartDate: Date | undefined;
+  setEventStartDate: (date: Date | undefined) => void;
+   onCreateActivity: (activity: Activity) => void;
 }

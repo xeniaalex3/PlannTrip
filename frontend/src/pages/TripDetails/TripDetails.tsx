@@ -1,20 +1,36 @@
 import { useState } from 'react'
-import {
-  Calendar,
-  MapPin,
-  Settings2,
-  Plus,
-} from 'lucide-react'
+import { Calendar, MapPin, Settings2, Plus } from 'lucide-react'
 import CustomButton from '../../components/ui/CustomButton/CustomButton'
 import LinksContent from './LinksContainer/LinksContent/LinksContent'
 import CreateLinkModal from './LinksContainer/CreateLinkModal/CreateLinkModal'
 import ActivityContent from './ActivitiesContainer/ActivityContent/ActivityContent'
+import CreateActivityModal from './ActivitiesContainer/CreateActivityModal/CreateActivityModal'
+import { type Activity } from '../../@types/tripDetails'
 
 export default function TripDetails() {
   const [openLinkModal, setOpenLinkModal] = useState(false)
+  const [openActivityModal, setOpenActivityModal] = useState(false)
+  const [eventStartDate, setEventStartDate] = useState<Date>()
+  const [activities, setActivities] = useState<Activity[]>([])
 
+  // link
   const handleOpenLinkModal = () => setOpenLinkModal(true)
   const handleCloseLinkModal = () => setOpenLinkModal(false)
+  // activity
+  const handleOpenActivityModal = () => setOpenActivityModal(true)
+  const handleCloseActivityModal = () => setOpenActivityModal(false)
+
+  function handleCreateActivity(newActivity: Activity) {
+    setActivities(prev => [...prev, newActivity])
+  }
+
+  function toggleActivityDone(id: number) {
+  setActivities(prev =>
+    prev.map(activity =>
+      activity.id === id ? { ...activity, done: !activity.done } : activity
+    )
+  )
+}
 
   return (
     <div className="max-w-6xl px-6 py-10 mx-auto space-y-8">
@@ -36,16 +52,16 @@ export default function TripDetails() {
         </div>
       </div>
       <main className="flex gap-16 px-6">
-        <div className="flex-1 space-y-6">
+        <div className="flex-1 space-y-12">
           <div className="flex items-center justify-between">
             <h2 className="text-3xl font-semibold text-zinc-50">Activités</h2>
-            <CustomButton type="button">
+            <CustomButton type="button" onClick={handleOpenActivityModal}>
               <Plus className="size-5 text-lime-950" />
               Enregistrer l'activité
             </CustomButton>
           </div>
-          <div className="space-y-8">
-         <ActivityContent dayLabel={''} weekDay={''} activities={[]} />
+          <div className="space-y-3">
+            <ActivityContent activities={activities} onToggleDone={toggleActivityDone}/>
           </div>
         </div>
 
@@ -80,6 +96,15 @@ export default function TripDetails() {
       </main>
       {openLinkModal && (
         <CreateLinkModal handleCloseLinkModal={handleCloseLinkModal} />
+      )}
+
+      {openActivityModal && (
+        <CreateActivityModal
+          handleCloseActivityModal={handleCloseActivityModal}
+          eventStartDate={eventStartDate}
+          setEventStartDate={setEventStartDate}
+          onCreateActivity={handleCreateActivity}
+        />
       )}
     </div>
   )
