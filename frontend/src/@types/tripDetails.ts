@@ -1,8 +1,20 @@
 export interface LinksContentProps {
-title: string;
-link: string
+  title: string
+  link: string
 }
 
 export interface CreateLinkModalProps {
-  handleCloseLinkModal: () => void;
+  handleCloseLinkModal: () => void
+}
+
+export interface Activity {
+  title: string
+  time: string
+  done: boolean
+}
+
+export interface ActivityContentProps {
+  dayLabel: string
+  weekDay: string
+  activities: Activity[]
 }

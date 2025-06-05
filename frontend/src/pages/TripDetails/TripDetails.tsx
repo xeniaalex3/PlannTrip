@@ -4,12 +4,11 @@ import {
   MapPin,
   Settings2,
   Plus,
-  CircleCheck,
-  CircleDashed
 } from 'lucide-react'
 import CustomButton from '../../components/ui/CustomButton/CustomButton'
 import LinksContent from './LinksContainer/LinksContent/LinksContent'
 import CreateLinkModal from './LinksContainer/CreateLinkModal/CreateLinkModal'
+import ActivityContent from './ActivitiesContainer/ActivityContent/ActivityContent'
 
 export default function TripDetails() {
   const [openLinkModal, setOpenLinkModal] = useState(false)
@@ -46,39 +45,7 @@ export default function TripDetails() {
             </CustomButton>
           </div>
           <div className="space-y-8">
-            <div className="space-y-2.5">
-              <div className="flex gap-2 items-baseline">
-                <span className="text-zinc-300 font-semibold text-xl">
-                  Jour 17
-                </span>
-                <span className="text-zinc-500 text-xs">Samedi</span>
-              </div>
-              <p className="text-zinc-500 text-sm">
-                Aucune activité enregistrée à cette date.
-              </p>
-            </div>
-            <div className="space-y-2.5">
-              <div className="flex gap-2 items-baseline">
-                <span className="text-zinc-300 font-semibold text-xl">
-                  Jour 18
-                </span>
-                <span className="text-zinc-500 text-xs">Dimanche</span>
-              </div>
-              <div className="space-y-2.5">
-                <div className="px-4 py-2.5 bg-zinc-900 rounded-xl shadow-[var(--shadow)] flex items-center gap-3">
-                  <CircleCheck className="size-5 text-lime-300" />
-                  <span className="text-zinc-100">Course de karting</span>
-                  <span className="text-zinc-400 text-sm ml-auto">08:00h</span>
-                </div>
-              </div>
-              <div className="space-y-2.5">
-                <div className="px-4 py-2.5 bg-zinc-900 rounded-xl shadow-[var(--shadow)] flex items-center gap-3">
-                  <CircleDashed className="size-5 text-zinc-400" />
-                  <span className="text-zinc-100">Le déjeuner</span>
-                  <span className="text-zinc-400 text-sm ml-auto">12:00h</span>
-                </div>
-              </div>
-            </div>
+         <ActivityContent dayLabel={''} weekDay={''} activities={[]} />
           </div>
         </div>
 
