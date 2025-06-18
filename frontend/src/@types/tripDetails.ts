@@ -26,3 +26,15 @@ export interface CreateActivityModalProps {
   setEventStartDate: (date: Date | undefined) => void;
    onCreateActivity: (activity: Activity) => void;
 }
+
+export interface Guest{
+  id: number
+  name: string;
+  email: string;
+  done: boolean
+}
+
+export interface GuestsContentProps {
+  guests: Guest[];
+  onToggleDone: (index: number) => void
+}
