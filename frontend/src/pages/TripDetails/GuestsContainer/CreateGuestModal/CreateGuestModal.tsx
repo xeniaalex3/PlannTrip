@@ -1,3 +1,4 @@
+import { useState, type FormEvent } from 'react'
 import ModalWrapper from '../../../../components/ui/ModalWrapper/ModalWrapper'
 import InputWrapper from '../../../../components/ui/form/InputWrapper/InputWrapper'
 import CustomButton from '../../../../components/ui/CustomButton/CustomButton'
@@ -5,8 +6,31 @@ import { User, Mail } from 'lucide-react'
 import { type CreateGuestModalProps } from '../../../../@types/tripDetails'
 
 export default function CreateGuestModal({
-  handleCloseGuestModal
+  handleCloseGuestModal,
+  onCreateGuest
 }: CreateGuestModalProps) {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+
+  function handleSubmitCreateNewGuest(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (!name || !email) return
+
+    const id = Date.now()
+
+    const newGuest = {
+      id,
+      name,
+      email,
+      done: false
+    }
+
+    onCreateGuest(newGuest)
+
+    e.currentTarget.reset()
+    handleCloseGuestModal()
+  }
+
   return (
     <ModalWrapper onClick={handleCloseGuestModal}>
       <div className="space-y-2 flex flex-col items-start">
@@ -30,7 +54,11 @@ export default function CreateGuestModal({
           </p>
         </div>
       </div>
-      <form action="" className="flex flex-col items-center  mt-4 space-y-3">
+      <form
+        action=""
+        className="flex flex-col items-center  mt-4 space-y-3"
+        onSubmit={handleSubmitCreateNewGuest}
+      >
         <div className="flex items-center gap-2 bg-zinc-950 h-14 w-full px-2 rounded-lg">
           <User className="text-zinc-400 size-5" />
           <InputWrapper
@@ -38,6 +66,8 @@ export default function CreateGuestModal({
             name="name"
             placeholder="Votre nom complet"
             className="bg-transparent text-lg placeholder-zinc-400 outline-none w-90"
+            value={name}
+            onChange={e => setName(e.target.value)}
           />
         </div>
         <div className="flex items-center gap-2 bg-zinc-950 h-14 w-full px-2 rounded-lg">
@@ -47,6 +77,8 @@ export default function CreateGuestModal({
             name="email"
             placeholder="Votre e-mail"
             className="bg-transparent text-lg placeholder-zinc-400 outline-none w-90"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
         </div>
         <CustomButton type="submit" fullWidth>
