@@ -1,17 +1,19 @@
 import { useState } from 'react'
-import { Calendar, MapPin, Settings2, Plus } from 'lucide-react'
+import { Calendar, MapPin, Settings2, Plus, UserCog } from 'lucide-react'
 import CustomButton from '../../components/ui/CustomButton/CustomButton'
 import LinksContent from './LinksContainer/LinksContent/LinksContent'
 import CreateLinkModal from './LinksContainer/CreateLinkModal/CreateLinkModal'
 import ActivityContent from './ActivitiesContainer/ActivityContent/ActivityContent'
 import CreateActivityModal from './ActivitiesContainer/CreateActivityModal/CreateActivityModal'
-import { type Activity } from '../../@types/tripDetails'
+import { type Activity, type Guest } from '../../@types/tripDetails'
+import GuestsContent from './GuestsContainer/GuestsContent/GuestsContent'
 
 export default function TripDetails() {
   const [openLinkModal, setOpenLinkModal] = useState(false)
   const [openActivityModal, setOpenActivityModal] = useState(false)
   const [eventStartDate, setEventStartDate] = useState<Date>()
   const [activities, setActivities] = useState<Activity[]>([])
+  const [guests, setGuests] = useState<Guest[]>([])
 
   // link
   const handleOpenLinkModal = () => setOpenLinkModal(true)
@@ -25,12 +27,20 @@ export default function TripDetails() {
   }
 
   function toggleActivityDone(id: number) {
-  setActivities(prev =>
-    prev.map(activity =>
-      activity.id === id ? { ...activity, done: !activity.done } : activity
+    setActivities(prev =>
+      prev.map(activity =>
+        activity.id === id ? { ...activity, done: !activity.done } : activity
+      )
     )
-  )
-}
+  }
+
+  function toggleGuestDone(id: number) {
+    setGuests(prev =>
+      prev.map(guest =>
+        guest.id === id ? { ...guest, done: !guest.done } : guest
+      )
+    )
+  }
 
   return (
     <div className="max-w-6xl px-6 py-10 mx-auto space-y-8">
@@ -61,7 +71,10 @@ export default function TripDetails() {
             </CustomButton>
           </div>
           <div className="space-y-3">
-            <ActivityContent activities={activities} onToggleDone={toggleActivityDone}/>
+            <ActivityContent
+              activities={activities}
+              onToggleDone={toggleActivityDone}
+            />
           </div>
         </div>
 
@@ -91,6 +104,16 @@ export default function TripDetails() {
           <div className="w-full h-px bg-zinc-700" />
           <div className="space-y-6">
             <h3 className="text-zinc-100 font-semibold text-lg">Invités</h3>
+            <GuestsContent guests={guests} onToggleDone={toggleGuestDone} />
+            <CustomButton
+              type="button"
+              color="gray"
+              fullWidth
+              onClick={handleOpenLinkModal}
+            >
+              <UserCog className="size-5 text-zinc-200" />
+              Gestion des invités
+            </CustomButton>
           </div>
         </div>
       </main>
