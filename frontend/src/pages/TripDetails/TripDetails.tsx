@@ -7,10 +7,12 @@ import ActivityContent from './ActivitiesContainer/ActivityContent/ActivityConte
 import CreateActivityModal from './ActivitiesContainer/CreateActivityModal/CreateActivityModal'
 import { type Activity, type Guest } from '../../@types/tripDetails'
 import GuestsContent from './GuestsContainer/GuestsContent/GuestsContent'
+import CreateGuestModal from './GuestsContainer/CreateGuestModal/CreateGuestModal'
 
 export default function TripDetails() {
   const [openLinkModal, setOpenLinkModal] = useState(false)
   const [openActivityModal, setOpenActivityModal] = useState(false)
+  const [openGuestModal, setOpenGuestModal] = useState(false)
   const [eventStartDate, setEventStartDate] = useState<Date>()
   const [activities, setActivities] = useState<Activity[]>([])
   const [guests, setGuests] = useState<Guest[]>([])
@@ -21,6 +23,11 @@ export default function TripDetails() {
   // activity
   const handleOpenActivityModal = () => setOpenActivityModal(true)
   const handleCloseActivityModal = () => setOpenActivityModal(false)
+  // guest
+  const handleOpenGuestModal = () => setOpenGuestModal(true)
+  const handleCloseGuestModal = () => setOpenGuestModal(false)
+
+  // Activities
 
   function handleCreateActivity(newActivity: Activity) {
     setActivities(prev => [...prev, newActivity])
@@ -32,6 +39,12 @@ export default function TripDetails() {
         activity.id === id ? { ...activity, done: !activity.done } : activity
       )
     )
+  }
+
+  // Guests
+
+  function handleCreateGuest(newGuest: Guest) {
+    setGuests(prev => [...prev, newGuest])
   }
 
   function toggleGuestDone(id: number) {
@@ -109,7 +122,7 @@ export default function TripDetails() {
               type="button"
               color="gray"
               fullWidth
-              onClick={handleOpenLinkModal}
+              onClick={handleOpenGuestModal}
             >
               <UserCog className="size-5 text-zinc-200" />
               Gestion des invités
@@ -119,6 +132,12 @@ export default function TripDetails() {
       </main>
       {openLinkModal && (
         <CreateLinkModal handleCloseLinkModal={handleCloseLinkModal} />
+      )}
+      {openGuestModal && (
+        <CreateGuestModal
+          handleCloseGuestModal={handleCloseGuestModal}
+          onCreateGuest={handleCreateGuest}
+        />
       )}
 
       {openActivityModal && (

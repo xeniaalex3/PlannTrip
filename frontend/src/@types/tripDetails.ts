@@ -38,3 +38,8 @@ export interface GuestsContentProps {
   guests: Guest[];
   onToggleDone: (index: number) => void
 }
+
+export interface CreateGuestModalProps {
+  handleCloseGuestModal: () => void;
+   onCreateGuest: (guest: Guest) => void;
+}
