@@ -40,7 +40,7 @@ export default function CreateLinkModal({
                 className="bg-transparent text-lg placeholder-zinc-400 outline-none w-90"
               />
             </div>
-            <CustomButton type="submit" fullWidth='true'>
+            <CustomButton type="submit" fullWidth>
               Enregistrer le lien
             </CustomButton>
           </form>

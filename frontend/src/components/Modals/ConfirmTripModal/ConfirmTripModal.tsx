@@ -73,7 +73,7 @@ export default function ConfirmTripModal({
             className="bg-transparent text-lg placeholder-zinc-400 outline-none w-90"
           />
         </div>
-        <CustomButton type="submit" fullWidth='true'>
+        <CustomButton type="submit" fullWidth>
           Confirmer la création du voyage
         </CustomButton>
       </form>

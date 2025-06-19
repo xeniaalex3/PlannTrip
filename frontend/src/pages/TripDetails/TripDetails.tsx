@@ -92,7 +92,7 @@ export default function TripDetails() {
             <CustomButton
               type="button"
               color="gray"
-              fullWidth='true'
+              fullWidth
               onClick={handleOpenLinkModal}
             >
               <Plus className="size-5 text-zinc-200" />
@@ -106,7 +106,7 @@ export default function TripDetails() {
             <CustomButton
               type="button"
               color="gray"
-              fullWidth='true'
+              fullWidth
               onClick={handleOpenGuestModal}
             >
               <UserCog className="size-5 text-zinc-200" />
