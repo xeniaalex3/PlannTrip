@@ -6,7 +6,7 @@ export default function LinksContent({ title, link} : LinksContentProps) {
   return (
     <div className="flex justify-between items-center">
       <div>
-        <h4 className="text-zinc-400 font-xs">{title}</h4>
+        <h4 className="text-zinc-400">{title}</h4>
       </div>
       <Link to={link} target="_blank">
         {' '}

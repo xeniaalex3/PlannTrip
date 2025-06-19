@@ -10,8 +10,8 @@ export default function GuestsContent({
       {guests.map(guest => (
         <div className="flex justify-between items-center" key={guest.id}>
           <div>
-            <h4 className="text-zinc-400 text-xs">{guest.name}</h4>
-            <p className="text-zinc-200 text-sm">{guest.email}</p>
+            <h4 className="text-zinc-100">{guest.name}</h4>
+            <p className="text-zinc-400 text-sm">{guest.email}</p>
           </div>
           <button onClick={() => onToggleDone(guest.id)}>
             {guest.done ? (

@@ -2,7 +2,7 @@ import { type Dispatch, type FormEvent } from 'react'
 import ModalWrapper from '../../ui/ModalWrapper/ModalWrapper'
 import { X, AtSign, Plus } from 'lucide-react'
 import InputWrapper from '../../ui/form/InputWrapper/InputWrapper'
-import CustomButton from '../../ui/CustomButton/CustomButton'
+import CustomButton from '../../ui/Button/CustomButton/CustomButton'
 import { toast } from 'react-toastify'
 
 interface InviteGuestModalProps {

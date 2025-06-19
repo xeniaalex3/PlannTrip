@@ -1,5 +1,5 @@
 import { clsx } from "clsx";
-import { type CustomButtonProps } from '../../../@types/ui'
+import { type CustomButtonProps } from '../../../../@types/ui'
 
 export default function CustomButton({
   children,

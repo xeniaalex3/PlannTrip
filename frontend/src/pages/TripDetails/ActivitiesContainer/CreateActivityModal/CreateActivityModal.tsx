@@ -2,7 +2,7 @@ import { useState, type FormEvent, useEffect } from 'react'
 import { Calendar, Clock, Tag } from 'lucide-react'
 import ModalWrapper from '../../../../components/ui/ModalWrapper/ModalWrapper'
 import InputWrapper from '../../../../components/ui/form/InputWrapper/InputWrapper'
-import CustomButton from '../../../../components/ui/CustomButton/CustomButton'
+import CustomButton from '../../../../components/ui/Button/CustomButton/CustomButton'
 import { type CreateActivityModalProps } from '../../../../@types/tripDetails'
 import DatePicker from '../../../../components/ui/DatePicket/DatePicket'
 

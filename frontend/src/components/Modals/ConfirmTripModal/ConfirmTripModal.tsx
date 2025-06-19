@@ -2,7 +2,7 @@ import { type FormEvent } from 'react'
 import ModalWrapper from '../../ui/ModalWrapper/ModalWrapper'
 import { User, Mail } from 'lucide-react'
 import InputWrapper from '../../ui/form/InputWrapper/InputWrapper'
-import CustomButton from '../../ui/CustomButton/CustomButton'
+import CustomButton from '../../ui/Button/CustomButton/CustomButton'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router'
 
