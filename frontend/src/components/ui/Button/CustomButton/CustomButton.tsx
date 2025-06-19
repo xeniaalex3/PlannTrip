@@ -6,19 +6,21 @@ const buttonVariants = tv({
   variants: {
     color: {
       yellow: 'bg-lime-300 text-lime-950 hover:bg-lime-400',
-      gray: 'bg-zinc-800 text-zinc-200 hover:bg-zinc-700',
+      gray: 'bg-zinc-800 text-zinc-200 hover:bg-zinc-700'
     },
     fullWidth: {
       true: 'w-full',
       false: ''
     }
   },
-   defaultVariants: {
+  defaultVariants: {
     color: 'yellow'
   }
 })
 
-interface CustomButtonProps extends Omit<ComponentProps<'button'>, 'color'>, VariantProps<typeof buttonVariants> {
+interface CustomButtonProps
+  extends Omit<ComponentProps<'button'>, 'color'>,
+    VariantProps<typeof buttonVariants> {
   children: ReactNode
   type: 'submit' | 'button' | 'reset'
 }
@@ -30,8 +32,6 @@ export default function CustomButton({
   fullWidth,
   ...props
 }: CustomButtonProps) {
- 
-
   return (
     <button
       {...props}
