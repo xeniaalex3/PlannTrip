@@ -7,6 +7,3 @@ export interface CustomButtonProps extends ComponentProps<'button'> {
   color?: 'yellow' | 'gray'
 }
 
-export interface ModifButtonProps extends ComponentProps<'button'>{
-  text: string
-}

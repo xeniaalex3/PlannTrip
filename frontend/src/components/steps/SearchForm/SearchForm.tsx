@@ -1,11 +1,10 @@
 import { useState } from 'react'
 import InputWrapper from '../../ui/form/InputWrapper/InputWrapper'
 import CustomButton from '../../ui/Button/CustomButton/CustomButton'
-import { MapIcon, Calendar, ArrowRight } from 'lucide-react'
+import { MapIcon, Calendar, ArrowRight, Settings2 } from 'lucide-react'
 import { type DateRange } from 'react-day-picker'
 import DatePicker from '../../ui/DatePicket/DatePicket'
 import { format } from 'date-fns'
-import ModifButton from '../../ui/Button/ModifButton/ModifButton'
 
 export interface SearchFormProps {
   openGuestInput: () => void
@@ -74,7 +73,10 @@ export default function SearchForm({
       )}
       <div className="w-px h-6 bg-zinc-600" />
       {inputOpen ? (
-        <ModifButton text="Modifier lieu/date" onClick={closeGuestInput} />
+        <CustomButton type="button" color="gray" onClick={closeGuestInput}>
+          Modifier lieu/date
+          <Settings2 className="size-5 text-zinc-200" />
+        </CustomButton>
       ) : (
         <CustomButton type="submit" onClick={openGuestInput}>
           Continuer
