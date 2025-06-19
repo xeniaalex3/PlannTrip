@@ -114,7 +114,7 @@ export default function CreateActivityModal({
           </div>
         </div>
 
-        <CustomButton type="submit" fullWidth>
+        <CustomButton type="submit" fullWidth='true'>
           Enregistrer l'activité
         </CustomButton>
       </form>

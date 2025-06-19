@@ -81,7 +81,7 @@ export default function CreateGuestModal({
             onChange={e => setEmail(e.target.value)}
           />
         </div>
-        <CustomButton type="submit" fullWidth>
+        <CustomButton type="submit" fullWidth='true'>
           Confirmer ma présence
         </CustomButton>
       </form>
