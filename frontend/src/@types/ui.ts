@@ -1,14 +1,12 @@
-import type { ReactNode } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
 
-export interface CustomButtonProps {
+export interface CustomButtonProps extends ComponentProps<'button'> {
   children: ReactNode
   type: 'submit' | 'button' | 'reset'
-  onClick?: () => void
   fullWidth?: boolean
   color?: 'yellow' | 'gray'
 }
 
-export interface ModifButtonProps {
+export interface ModifButtonProps extends ComponentProps<'button'>{
   text: string
-  onClick?: () => void
 }
