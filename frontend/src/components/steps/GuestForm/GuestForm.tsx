@@ -1,4 +1,4 @@
-import CustomButton from '../../ui/CustomButton/CustomButton'
+import CustomButton from '../../ui/Button/CustomButton/CustomButton'
 import { UserRoundPlus, ArrowRight } from 'lucide-react'
 
 interface GuestFormProps {

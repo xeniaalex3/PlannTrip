@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Calendar, MapPin, Settings2, Plus, UserCog } from 'lucide-react'
-import CustomButton from '../../components/ui/CustomButton/CustomButton'
+import { Plus, UserCog } from 'lucide-react'
+import CustomButton from '../../components/ui/Button/CustomButton/CustomButton'
 import LinksContent from './LinksContainer/LinksContent/LinksContent'
 import CreateLinkModal from './LinksContainer/CreateLinkModal/CreateLinkModal'
 import ActivityContent from './ActivitiesContainer/ActivityContent/ActivityContent'
@@ -8,6 +8,7 @@ import CreateActivityModal from './ActivitiesContainer/CreateActivityModal/Creat
 import { type Activity, type Guest } from '../../@types/tripDetails'
 import GuestsContent from './GuestsContainer/GuestsContent/GuestsContent'
 import CreateGuestModal from './GuestsContainer/CreateGuestModal/CreateGuestModal'
+import DestinationDateHeader from './DestinationDateHeader/DestinationDateHeader'
 
 export default function TripDetails() {
   const [openLinkModal, setOpenLinkModal] = useState(false)
@@ -57,23 +58,7 @@ export default function TripDetails() {
 
   return (
     <div className="max-w-6xl px-6 py-10 mx-auto space-y-8">
-      <div className="px-4 h-16 rounded-xl bg-zinc-900 shadow-[var(--shadow)] flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <MapPin className="size-5 text-zinc-400" />
-          <span className="text-lg text-zinc-100">Florianopolis, Brasil</span>
-        </div>
-        <div className="flex items-center gap-5">
-          <div className="flex items-center gap-2">
-            <Calendar className="size-5 text-zinc-400" />
-            <span className="text-lg text-zinc-200">17 à 23 de Agosto</span>
-          </div>
-          <div className="w-px h-6 bg-zinc-600" />
-          <CustomButton type="button" color="gray">
-            Modifier lieu/date
-            <Settings2 className="size-5 text-zinc-200" />
-          </CustomButton>
-        </div>
-      </div>
+      <DestinationDateHeader />
       <main className="flex gap-16 px-6">
         <div className="flex-1 space-y-12">
           <div className="flex items-center justify-between">

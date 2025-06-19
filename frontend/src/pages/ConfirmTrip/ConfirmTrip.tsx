@@ -1,4 +1,4 @@
-import CustomButton from '../../components/ui/CustomButton/CustomButton'
+import CustomButton from '../../components/ui/Button/CustomButton/CustomButton'
 import Logo from '../../components/ui/Logo/Logo'
 import { useNavigate } from 'react-router'
 

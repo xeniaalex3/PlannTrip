@@ -2,7 +2,7 @@ import ModalWrapper from '../../../../components/ui/ModalWrapper/ModalWrapper'
 import { type CreateLinkModalProps } from '../../../../@types/tripDetails'
 import { Link2, Tag } from 'lucide-react'
 import InputWrapper from '../../../../components/ui/form/InputWrapper/InputWrapper'
-import CustomButton from '../../../../components/ui/CustomButton/CustomButton'
+import CustomButton from '../../../../components/ui/Button/CustomButton/CustomButton'
 
 export default function CreateLinkModal({
   handleCloseLinkModal

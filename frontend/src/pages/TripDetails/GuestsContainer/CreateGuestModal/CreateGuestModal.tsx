@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import ModalWrapper from '../../../../components/ui/ModalWrapper/ModalWrapper'
 import InputWrapper from '../../../../components/ui/form/InputWrapper/InputWrapper'
-import CustomButton from '../../../../components/ui/CustomButton/CustomButton'
+import CustomButton from '../../../../components/ui/Button/CustomButton/CustomButton'
 import { User, Mail } from 'lucide-react'
 import { type CreateGuestModalProps } from '../../../../@types/tripDetails'
 
