@@ -1,5 +1,5 @@
-import { Calendar, MapPin } from 'lucide-react'
-import ModifButton from '../../../components/ui/Button/ModifButton/ModifButton'
+import { Calendar, MapPin, Settings2 } from 'lucide-react'
+import CustomButton from '../../../components/ui/Button/CustomButton/CustomButton'
 
 export default function DestinationDateHeader() {
   return (
@@ -14,7 +14,11 @@ export default function DestinationDateHeader() {
           <span className="text-lg text-zinc-200">17 à 23 de Agosto</span>
         </div>
         <div className="w-px h-6 bg-zinc-600" />
-        <ModifButton text="Modifier lieu/date" />
+
+        <CustomButton type="button" color="gray">
+          Modifier lieu/date
+          <Settings2 className="size-5 text-zinc-200" />
+        </CustomButton>
       </div>
     </div>
   )
