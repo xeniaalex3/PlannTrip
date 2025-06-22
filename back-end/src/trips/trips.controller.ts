@@ -10,24 +10,24 @@ import {
 import { TripsService } from './trips.service';
 import { CreateTripDto } from './dto/create-trip.dto';
 import { UpdateTripDto } from './dto/update-trip.dto';
-import { Prisma, Trip } from '@prisma/client';
+import { Prisma, Trips } from '@prisma/client';
 
 @Controller('trips')
 export class TripsController {
   constructor(private readonly tripsService: TripsService) {}
 
   @Get()
-  async findAll(): Promise<Trip[]> {
+  async findAll(): Promise<Trips[]> {
     return this.tripsService.findAll();
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number): Promise<Trip | null> {
-    return this.tripsService.findOne(id);
+  async findOne(@Param('id') id: string): Promise<Trips | null> {
+    return this.tripsService.findOne(+id);
   }
 
   @Post()
-  async create(@Body() createTripDto: CreateTripDto): Promise<Trip> {
+  async create(@Body() createTripDto: CreateTripDto): Promise<Trips> {
     const data: Prisma.TripsCreateInput = {
       destination: createTripDto.destination,
       starts_at: createTripDto.starts_at,
@@ -39,10 +39,10 @@ export class TripsController {
 
   @Patch(':id')
   async update(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body() updateTripDto: UpdateTripDto,
-  ): Promise<Trip> {
-    const data: Prisma.TripsCreateInput = {
+  ): Promise<Trips> {
+    const data: Prisma.TripsUpdateInput = {
       destination: updateTripDto.destination,
       starts_at: updateTripDto.starts_at,
       ends_at: updateTripDto.ends_at,
@@ -52,7 +52,7 @@ export class TripsController {
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: number): Promise<Trip> {
+  async remove(@Param('id') id: string): Promise<Trips> {
     return this.tripsService.remove(+id);
   }
 }

@@ -27,21 +27,19 @@ model Trip {
   activities   Activity[]
   links        Link[]
 
-  @@map("trips")
 }
 
 model Participant {
-  id Int @id @default(autoincrement())
+  id           Int @id @default(autoincrement())
 
   name         String?
   email        String
   is_confirmed Boolean @default(false)
   is_owner     Boolean @default(false)
 
-  trip_id Int
+  trip_id      Int
   trip    Trip   @relation(fields: [trip_id], references: [id])
 
-  @@map("participants")
 }
 
 model Activity {
@@ -52,7 +50,6 @@ model Activity {
   trip_id Int
   trip    Trip   @relation(fields: [trip_id], references: [id])
 
-  @@map("activities")
 }
 
 model Link {
@@ -63,5 +60,4 @@ model Link {
   trip_id Int
   trip    Trip   @relation(fields: [trip_id], references: [id])
 
-  @@map("links")
 }
