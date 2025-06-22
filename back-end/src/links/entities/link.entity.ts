@@ -1,7 +1,7 @@
 import { Trip } from 'src/trips/entities/trip.entity';
 
 export class Link {
-  id: string;
+  id: number;
   title: string;
   url: string;
   trip_id: string;

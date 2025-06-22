@@ -3,7 +3,7 @@ import { Link } from 'src/links/entities/link.entity';
 import { Participant } from 'src/participants/entities/participant.entity';
 
 export class Trip {
-  id: string;
+  id: number;
   destination: string;
   starts_at: Date;
   ends_at: Date;
