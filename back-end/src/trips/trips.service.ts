@@ -1,33 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Trips, Prisma } from '@prisma/client';
+import { Trip, Prisma } from '@prisma/client';
 
 @Injectable()
 export class TripsService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll(): Promise<Trips[]> {
+  async findAll(): Promise<Trip[]> {
     return this.prisma.trips.findMany();
   }
 
-  async findOne(id: number): Promise<Trips | null> {
+  async findOne(id: number): Promise<Trip | null> {
     return this.prisma.trips.findUnique({
       where: { id },
     });
   }
 
-  async create(data: Prisma.TripsCreateInput): Promise<Trips> {
+  async create(data: Prisma.TripCreateInput): Promise<Trip> {
     return this.prisma.trips.create({ data });
   }
 
-  async update(id: number, data: Prisma.TripsUpdateInput): Promise<Trips> {
+  async update(id: number, data: Prisma.TripUpdateInput): Promise<Trip> {
     return this.prisma.trips.update({
       where: { id },
       data,
     });
   }
 
-  async remove(id: number): Promise<Trips> {
+  async remove(id: number): Promise<Trip> {
     return this.prisma.trips.delete({
       where: { id },
     });
