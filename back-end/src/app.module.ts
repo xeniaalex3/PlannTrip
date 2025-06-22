@@ -7,7 +7,13 @@ import { LinksModule } from './links/links.module';
 import { ParticipantsModule } from './participants/participants.module';
 
 @Module({
-  imports: [PrismaModule, TripsModule, ActivitiesModule, LinksModule, ParticipantsModule],
+  imports: [
+    PrismaModule,
+    TripsModule,
+    ActivitiesModule,
+    LinksModule,
+    ParticipantsModule,
+  ],
   controllers: [],
   providers: [AppService],
 })
