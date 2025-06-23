@@ -27,6 +27,7 @@ model Trip {
   activities   Activity[]
   links        Link[]
 
+@@map("trips")
 }
 
 model Participant {
@@ -40,6 +41,7 @@ model Participant {
   trip_id      Int
   trip    Trip   @relation(fields: [trip_id], references: [id])
 
+@@map("participants")
 }
 
 model Activity {
@@ -50,6 +52,7 @@ model Activity {
   trip_id Int
   trip    Trip   @relation(fields: [trip_id], references: [id])
 
+@@map("activities")
 }
 
 model Link {
@@ -60,4 +63,5 @@ model Link {
   trip_id Int
   trip    Trip   @relation(fields: [trip_id], references: [id])
 
+@@map("links")
 }
