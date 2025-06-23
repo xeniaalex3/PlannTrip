@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "Trip" (
+CREATE TABLE "trips" (
     "id" SERIAL NOT NULL,
     "destination" TEXT NOT NULL,
     "starts_at" TIMESTAMP(3) NOT NULL,
@@ -7,11 +7,11 @@ CREATE TABLE "Trip" (
     "is_confirmed" BOOLEAN NOT NULL DEFAULT false,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "Trip_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "trips_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Participant" (
+CREATE TABLE "participants" (
     "id" SERIAL NOT NULL,
     "name" TEXT,
     "email" TEXT NOT NULL,
@@ -19,34 +19,34 @@ CREATE TABLE "Participant" (
     "is_owner" BOOLEAN NOT NULL DEFAULT false,
     "trip_id" INTEGER NOT NULL,
 
-    CONSTRAINT "Participant_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "participants_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Activity" (
+CREATE TABLE "activities" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "occurs_at" TIMESTAMP(3) NOT NULL,
     "trip_id" INTEGER NOT NULL,
 
-    CONSTRAINT "Activity_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "activities_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Link" (
+CREATE TABLE "links" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "url" TEXT NOT NULL,
     "trip_id" INTEGER NOT NULL,
 
-    CONSTRAINT "Link_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "links_pkey" PRIMARY KEY ("id")
 );
 
 -- AddForeignKey
-ALTER TABLE "Participant" ADD CONSTRAINT "Participant_trip_id_fkey" FOREIGN KEY ("trip_id") REFERENCES "Trip"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "participants" ADD CONSTRAINT "participants_trip_id_fkey" FOREIGN KEY ("trip_id") REFERENCES "trips"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Activity" ADD CONSTRAINT "Activity_trip_id_fkey" FOREIGN KEY ("trip_id") REFERENCES "Trip"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "activities" ADD CONSTRAINT "activities_trip_id_fkey" FOREIGN KEY ("trip_id") REFERENCES "trips"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Link" ADD CONSTRAINT "Link_trip_id_fkey" FOREIGN KEY ("trip_id") REFERENCES "Trip"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "links" ADD CONSTRAINT "links_trip_id_fkey" FOREIGN KEY ("trip_id") REFERENCES "trips"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
