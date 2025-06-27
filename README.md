@@ -25,10 +25,4 @@ plannTrip est une application web destinée à faciliter l'organisation de voyag
 - react-day-picker
 - react-toastify
 
-### Backend :
 
-- Nest.js 11
-- Prisma ORM
-- PostreSQL
-- class-validator
-- class-transform
