@@ -25,4 +25,29 @@ plannTrip est une application web destinée à faciliter l'organisation de voyag
 - react-day-picker
 - react-toastify
 
+## 📦 Getting Started
 
+Tout d'abord, clonez le dépôt :
+
+```bash
+git clone https://github.com/xeniaalex3/PlannTrip.git
+cd PlannTrip
+```
+
+Installez ensuite les dépendances :
+
+```bash
+npm install
+```
+
+Démarrer le serveur de développement :
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
