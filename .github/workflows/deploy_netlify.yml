@@ -35,7 +35,7 @@ jobs:
         run: npm install -g netlify-cli
 
       - name: Deploy to Netlify
-        run: netlify deploy --dir=dist --prod
+        run: netlify deploy --prod
         working-directory: ./frontend
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_API_TOKEN }}
