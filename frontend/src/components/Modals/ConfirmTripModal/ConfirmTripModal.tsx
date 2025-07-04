@@ -5,6 +5,8 @@ import InputWrapper from '../../ui/form/InputWrapper/InputWrapper'
 import CustomButton from '../../ui/Button/CustomButton/CustomButton'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router'
+import { formatDateRange } from '../../../utils/date'
+import { useTrip } from '../../../context/TripContext'
 
 interface ConfirmTripModalProps {
   closeModalConfirmation: () => void
@@ -13,7 +15,11 @@ interface ConfirmTripModalProps {
 export default function ConfirmTripModal({
   closeModalConfirmation
 }: ConfirmTripModalProps) {
+
   const navigate = useNavigate()
+  const { tripLocation, eventStartAndEndDates} = useTrip();
+
+  const formattedDates = formatDateRange(eventStartAndEndDates,  ' au ');
 
   function handleSubmitConfirmationTrip(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -41,11 +47,11 @@ export default function ConfirmTripModal({
         <p className="text-zinc-400 text-sm text-left">
           Pour réaliser votre voyage à{' '}
           <span className="font-semibold text-zinc-100">
-            Florianópolis, Brésil
+            {tripLocation}
           </span>{' '}
           , du{' '}
           <span className="font-semibold text-zinc-100">
-            16 au 27 août 2024
+             {formattedDates}
           </span>
           , remplissez vos coordonnées ci-dessous :
         </p>

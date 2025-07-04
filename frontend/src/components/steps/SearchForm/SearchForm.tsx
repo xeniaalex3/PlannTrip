@@ -2,26 +2,24 @@ import { useState } from 'react'
 import InputWrapper from '../../ui/form/InputWrapper/InputWrapper'
 import CustomButton from '../../ui/Button/CustomButton/CustomButton'
 import { MapIcon, Calendar, ArrowRight, Settings2 } from 'lucide-react'
-import { type DateRange } from 'react-day-picker'
 import DatePicker from '../../ui/DatePicket/DatePicket'
-import { format } from 'date-fns'
+import { useTrip } from '../../../context/TripContext'
+import { formatDateRange } from '../../../utils/date'
 
 export interface SearchFormProps {
   openGuestInput: () => void
   closeGuestInput: () => void
   inputOpen: boolean
-  setEventStartAndEndDates: (dates: DateRange | undefined) => void
-  eventStartAndEndDates: DateRange | undefined
 }
 
 export default function SearchForm({
   openGuestInput,
   inputOpen,
   closeGuestInput,
-  setEventStartAndEndDates,
-  eventStartAndEndDates
 }: SearchFormProps) {
+
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
+  const { setEventStartAndEndDates, setTripLocation, eventStartAndEndDates} = useTrip();
 
   function openDatePicker() {
     setIsDatePickerOpen(true)
@@ -31,13 +29,7 @@ export default function SearchForm({
     setIsDatePickerOpen(false)
   }
 
-  const displayedDate =
-    eventStartAndEndDates?.from && eventStartAndEndDates?.to
-      ? `${format(eventStartAndEndDates.from, 'dd/MM/yyyy')} - ${format(
-          eventStartAndEndDates.to,
-          'dd/MM/yyyy'
-        )}`
-      : null
+  const displayedDate = formatDateRange(eventStartAndEndDates);
 
   return (
     <div className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center w-[42rem] shadow-[var(--shadow)] gap-3">
@@ -48,6 +40,7 @@ export default function SearchForm({
           placeholder="Où allez-vous?"
           className="bg-transparent text-lg placeholder-zinc-400 outline-none"
           disabled={inputOpen}
+          onChange={(e) => setTripLocation(e.target.value)}
         />
       </div>
 
