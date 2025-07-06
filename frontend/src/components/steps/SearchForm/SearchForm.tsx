@@ -15,11 +15,15 @@ export interface SearchFormProps {
 export default function SearchForm({
   openGuestInput,
   inputOpen,
-  closeGuestInput,
+  closeGuestInput
 }: SearchFormProps) {
-
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
-  const { setEventStartAndEndDates, setTripLocation, eventStartAndEndDates} = useTrip();
+  const {
+    setEventStartAndEndDates,
+    setTripLocation,
+    eventStartAndEndDates,
+    tripLocation
+  } = useTrip()
 
   function openDatePicker() {
     setIsDatePickerOpen(true)
@@ -29,7 +33,7 @@ export default function SearchForm({
     setIsDatePickerOpen(false)
   }
 
-  const displayedDate = formatDateRange(eventStartAndEndDates);
+  const displayedDate = formatDateRange(eventStartAndEndDates)
 
   return (
     <div className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center w-[42rem] shadow-[var(--shadow)] gap-3">
@@ -40,7 +44,8 @@ export default function SearchForm({
           placeholder="Où allez-vous?"
           className="bg-transparent text-lg placeholder-zinc-400 outline-none"
           disabled={inputOpen}
-          onChange={(e) => setTripLocation(e.target.value)}
+          onChange={e => setTripLocation(e.target.value)}
+          value={tripLocation}
         />
       </div>
 
@@ -54,6 +59,7 @@ export default function SearchForm({
           }`}
           disabled={inputOpen}
           value={displayedDate ?? undefined}
+          readOnly
         />
       </button>
       {isDatePickerOpen && (
