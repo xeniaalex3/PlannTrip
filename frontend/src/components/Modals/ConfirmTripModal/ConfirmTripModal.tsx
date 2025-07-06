@@ -9,11 +9,13 @@ import { formatDateRange } from '../../../utils/date'
 import { useTrip } from '../../../context/TripContext'
 
 interface ConfirmTripModalProps {
-  closeModalConfirmation: () => void
+  closeModalConfirmation: () => void;
+  emailsToInvite: string[]
 }
 
 export default function ConfirmTripModal({
-  closeModalConfirmation
+  closeModalConfirmation,
+  emailsToInvite,
 }: ConfirmTripModalProps) {
 
   const navigate = useNavigate()
@@ -24,6 +26,8 @@ export default function ConfirmTripModal({
   function handleSubmitConfirmationTrip(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
+   
+
     const formData = new FormData(event.currentTarget)
     const name = formData.get('name') as string
     const email = formData.get('email') as string
@@ -32,6 +36,12 @@ export default function ConfirmTripModal({
       toast.error('Veuillez remplir tous les champs.')
       return
     }
+
+     console.log(name);
+     console.log(email);
+     console.log(tripLocation);
+     console.log(eventStartAndEndDates);
+     console.log(emailsToInvite);
 
     navigate('/confirm-trip')
 

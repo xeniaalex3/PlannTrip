@@ -3,17 +3,13 @@ import SearchForm from '../../components/steps/SearchForm/SearchForm'
 import GuestForm from '../../components/steps/GuestForm/GuestForm'
 import InviteGuestModal from '../../components/Modals/InviteGuestModal/InviteGuestModal'
 import ConfirmTripModal from '../../components/Modals/ConfirmTripModal/ConfirmTripModal'
-import type { DateRange } from "react-day-picker";
 
 export default function Home() {
   const [inputOpen, setInputOpen] = useState(false)
   const [guestModalOpen, setGuestModalOpen] = useState(false)
   const [confirmModal, setConfirmModal] = useState(false)
   const [emailsToInvite, setEmailsToInvite] = useState<string[]>([])
-  const [eventStartAndEndDates, setEventStartAndEndDates] = useState<
-		DateRange | undefined
-	>()
-
+  
   const openGuestInput = () => setInputOpen(true)
   const closeGuestInput = () => setInputOpen(false)
   const openGuestModal = () => setGuestModalOpen(true)
@@ -28,8 +24,6 @@ export default function Home() {
           openGuestInput={openGuestInput}
           inputOpen={inputOpen}
           closeGuestInput={closeGuestInput}
-          eventStartAndEndDates={eventStartAndEndDates}
-          setEventStartAndEndDates={setEventStartAndEndDates}
         />
         {inputOpen && (
           <GuestForm
@@ -49,7 +43,7 @@ export default function Home() {
       )}
 
       {confirmModal && (
-        <ConfirmTripModal closeModalConfirmation={closeModalConfirmation} />
+        <ConfirmTripModal closeModalConfirmation={closeModalConfirmation} emailsToInvite={emailsToInvite}/>
       )}
     </>
   )
