@@ -7,26 +7,27 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router'
 import { formatDateRange } from '../../../utils/date'
 import { useTrip } from '../../../context/TripContext'
+import { useCreateTrip } from '../../../api/hooks/trips/mutations'
 
 interface ConfirmTripModalProps {
-  closeModalConfirmation: () => void;
+  closeModalConfirmation: () => void
   emailsToInvite: string[]
 }
 
 export default function ConfirmTripModal({
   closeModalConfirmation,
-  emailsToInvite,
+  emailsToInvite
 }: ConfirmTripModalProps) {
-
   const navigate = useNavigate()
-  const { tripLocation, eventStartAndEndDates} = useTrip();
+  const { tripLocation, eventStartAndEndDates } = useTrip()
+  const createTrip = useCreateTrip()
 
-  const formattedDates = formatDateRange(eventStartAndEndDates,  ' au ');
+  const formattedDates = formatDateRange(eventStartAndEndDates, ' au ')
 
-  function handleSubmitConfirmationTrip(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmitConfirmationTrip(
+    event: FormEvent<HTMLFormElement>
+  ) {
     event.preventDefault()
-
-   
 
     const formData = new FormData(event.currentTarget)
     const name = formData.get('name') as string
@@ -37,15 +38,42 @@ export default function ConfirmTripModal({
       return
     }
 
-     console.log(name);
-     console.log(email);
-     console.log(tripLocation);
-     console.log(eventStartAndEndDates);
-     console.log(emailsToInvite);
+    if (
+      !eventStartAndEndDates ||
+      !eventStartAndEndDates.from ||
+      !eventStartAndEndDates.to
+    ) {
+      toast.error('Les dates du voyage ne sont pas définies.')
+      return
+    }
 
-    navigate('/confirm-trip')
+    try {
+      await createTrip.mutateAsync({
+        destination: tripLocation,
+        starts_at: eventStartAndEndDates.from.toISOString(),
+        ends_at: eventStartAndEndDates.to?.toISOString(),
+        is_confirmed: true,
+        participants: [
+          {
+            name,
+            email,
+            is_owner: true
+          },
+          ...emailsToInvite.map(guestEmail => ({
+            name: '',
+            email: guestEmail,
+            is_owner: false
+          }))
+        ]
+      })
 
-    event.currentTarget.reset()
+      toast.success('Voyage créé avec succès !')
+      closeModalConfirmation()
+      navigate('/confirm-trip')
+    } catch (error) {
+      console.error(error)
+      toast.error('Erreur lors de la création du voyage.')
+    }
   }
 
   return (
@@ -56,14 +84,10 @@ export default function ConfirmTripModal({
         </h2>
         <p className="text-zinc-400 text-sm text-left">
           Pour réaliser votre voyage à{' '}
-          <span className="font-semibold text-zinc-100">
-            {tripLocation}
-          </span>{' '}
-          , du{' '}
-          <span className="font-semibold text-zinc-100">
-             {formattedDates}
-          </span>
-          , remplissez vos coordonnées ci-dessous :
+          <span className="font-semibold text-zinc-100">{tripLocation}</span> ,
+          du{' '}
+          <span className="font-semibold text-zinc-100">{formattedDates}</span>,
+          remplissez vos coordonnées ci-dessous :
         </p>
       </div>
       <form
