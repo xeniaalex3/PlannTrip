@@ -5,4 +5,5 @@ export interface Participant {
   is_confirmed: boolean
   is_owner: boolean
   trip_id: number
+  done?: boolean
 }
