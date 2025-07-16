@@ -48,7 +48,7 @@ export default function ConfirmTripModal({
     }
 
     try {
-      await createTrip.mutateAsync({
+      const response = await createTrip.mutateAsync({
         destination: tripLocation,
         starts_at: eventStartAndEndDates.from.toISOString(),
         ends_at: eventStartAndEndDates.to?.toISOString(),
@@ -67,9 +67,11 @@ export default function ConfirmTripModal({
         ]
       })
 
+      const tripId = response.data.id
+
       toast.success('Voyage créé avec succès !')
       closeModalConfirmation()
-      navigate('/confirm-trip')
+      navigate('/confirm-trip', { state: { tripId } })
     } catch (error) {
       console.error(error)
       toast.error('Erreur lors de la création du voyage.')

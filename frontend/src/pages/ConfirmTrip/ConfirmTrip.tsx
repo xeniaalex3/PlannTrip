@@ -1,12 +1,16 @@
 import CustomButton from '../../components/ui/Button/CustomButton/CustomButton'
 import Logo from '../../components/ui/Logo/Logo'
-import { useNavigate } from 'react-router'
+import { useNavigate, useLocation } from 'react-router'
 
 export default function ConfirmTrip() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const tripId = location.state?.tripId
 
   function handleViewDetailsPage() {
-    navigate('/trips/1')
+    if (tripId) {
+      navigate(`/trips/${tripId}`)
+    }
   }
 
   return (
