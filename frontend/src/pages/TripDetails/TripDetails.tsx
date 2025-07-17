@@ -1,22 +1,38 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Plus, UserCog } from 'lucide-react'
 import CustomButton from '../../components/ui/Button/CustomButton/CustomButton'
 import LinksContent from './LinksContainer/LinksContent/LinksContent'
 import CreateLinkModal from './LinksContainer/CreateLinkModal/CreateLinkModal'
 import ActivityContent from './ActivitiesContainer/ActivityContent/ActivityContent'
 import CreateActivityModal from './ActivitiesContainer/CreateActivityModal/CreateActivityModal'
-import { type Activity, type Guest } from '../../@types/tripDetails'
 import GuestsContent from './GuestsContainer/GuestsContent/GuestsContent'
 import CreateGuestModal from './GuestsContainer/CreateGuestModal/CreateGuestModal'
 import DestinationDateHeader from './DestinationDateHeader/DestinationDateHeader'
+import { useTrip } from '../../api/hooks/trips/queries'
+import { type Activities } from '../../@types/activities'
+import { type Participant } from '../../@types/guests'
+import { type Links } from '../../@types/links'
+import { useParams } from 'react-router'
 
 export default function TripDetails() {
   const [openLinkModal, setOpenLinkModal] = useState(false)
   const [openActivityModal, setOpenActivityModal] = useState(false)
   const [openGuestModal, setOpenGuestModal] = useState(false)
   const [eventStartDate, setEventStartDate] = useState<Date>()
-  const [activities, setActivities] = useState<Activity[]>([])
-  const [guests, setGuests] = useState<Guest[]>([])
+  const [activities, setActivities] = useState<Activities[]>([])
+  const [guests, setGuests] = useState<Participant[]>([])
+  const [links, setLinks] = useState<Links[]>([])
+
+  const { tripId } = useParams<{ tripId: string }>()
+  const { data: trip } = useTrip(tripId!)
+
+  useEffect(() => {
+    if (trip) {
+      setActivities(trip.activities || [])
+      setGuests(trip.participants || [])
+      setLinks(trip.links || [])
+    }
+  }, [trip])
 
   // link
   const handleOpenLinkModal = () => setOpenLinkModal(true)
@@ -30,7 +46,7 @@ export default function TripDetails() {
 
   // Activities
 
-  function handleCreateActivity(newActivity: Activity) {
+  function handleCreateActivity(newActivity: Activities) {
     setActivities(prev => [...prev, newActivity])
   }
 
@@ -44,7 +60,7 @@ export default function TripDetails() {
 
   // Guests
 
-  function handleCreateGuest(newGuest: Guest) {
+  function handleCreateGuest(newGuest: Participant) {
     setGuests(prev => [...prev, newGuest])
   }
 
@@ -81,14 +97,7 @@ export default function TripDetails() {
             <h3 className="text-zinc-100 font-semibold text-lg">
               Liens importants
             </h3>
-            <LinksContent
-              title="Réservation d'AirBnB"
-              link="https://www.airbnb.com.br/rooms/104700011"
-            />
-            <LinksContent
-              title="Règlement intérieur"
-              link="https://www.notion.com/pages/1047000112"
-            />
+            <LinksContent links={links} />
             <CustomButton
               type="button"
               color="gray"

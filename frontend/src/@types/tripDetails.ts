@@ -1,45 +1,33 @@
+import { type Activities } from './activities'
+import { type Participant } from './guests'
+import { type Links } from './links'
+
 export interface LinksContentProps {
-  title: string
-  link: string
+  links: Links[];
 }
 
 export interface CreateLinkModalProps {
   handleCloseLinkModal: () => void
 }
 
-export interface Activity {
-  id: number
-  title: string
-  time: string
-  date: string
-  done: boolean
-}
-
 export interface ActivityContentProps {
-  activities: Activity[];
+  activities: Activities[]
   onToggleDone: (index: number) => void
 }
 
 export interface CreateActivityModalProps {
-  handleCloseActivityModal: () => void;
-  eventStartDate: Date | undefined;
-  setEventStartDate: (date: Date | undefined) => void;
-   onCreateActivity: (activity: Activity) => void;
-}
-
-export interface Guest{
-  id: number
-  name: string;
-  email: string;
-  done: boolean
+  handleCloseActivityModal: () => void
+  eventStartDate: Date | undefined
+  setEventStartDate: (date: Date | undefined) => void
+  onCreateActivity: (activity: Activities) => void
 }
 
 export interface GuestsContentProps {
-  guests: Guest[];
+  guests: Participant[]
   onToggleDone: (index: number) => void
 }
 
 export interface CreateGuestModalProps {
-  handleCloseGuestModal: () => void;
-   onCreateGuest: (guest: Guest) => void;
+  handleCloseGuestModal: () => void
+  onCreateGuest: (guest: Participant) => void
 }

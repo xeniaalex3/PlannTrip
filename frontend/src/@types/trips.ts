@@ -1,4 +1,6 @@
+import type { Activities } from "./activities";
 import type { Participant } from "./guests";
+import type { Links } from "./links";
 
 export interface Trip {
   id: number;
@@ -7,6 +9,8 @@ export interface Trip {
   ends_at: string;
   is_confirmed: boolean;
   participants: Participant[];
+  activities: Activities[];
+  links: Links[];
 }
 
 export interface CreateParticipant {

@@ -1,13 +1,14 @@
 import { CircleCheck, CircleDashed } from 'lucide-react'
-import { type ActivityContentProps, type Activity } from '../../../../@types/tripDetails'
+import { type ActivityContentProps } from '../../../../@types/tripDetails'
+import { type Activities } from '../../../../@types/activities'
 
 // Fonction de regroupement par date
-function groupActivitiesByDate(activities: Activity[]) {
-  return activities.reduce<Record<string, Activity[]>>((acc, activity) => {
-    if (!acc[activity.date]) {
-      acc[activity.date] = []
+function groupActivitiesByDate(activities: Activities[]) {
+  return activities.reduce<Record<string, Activities[]>>((acc, activity) => {
+    if (!acc[activity.occurs_at]) {
+      acc[activity.occurs_at] = []
     }
-    acc[activity.date].push(activity)
+    acc[activity.occurs_at].push(activity)
     return acc
   }, {})
 }
@@ -28,11 +29,11 @@ export default function ActivityContent({
 
   return (
     <div className="flex flex-col gap-12">
-      {Object.entries(grouped).map(([date, activitiesOnDate]) => (
-        <div key={date} className="space-y-3">
+      {Object.entries(grouped).map(([ occurs_at, activitiesOnDate]) => (
+        <div key={occurs_at} className="space-y-3">
           <div className="flex gap-2 items-baseline">
             <span className="text-zinc-300 font-semibold text-xl">
-              Jour <span className="text-lg text-zinc-400 ml-2">{date}</span>
+              Jour <span className="text-lg text-zinc-400 ml-2">{occurs_at}</span>
             </span>
           </div>
 
@@ -50,7 +51,7 @@ export default function ActivityContent({
               </button>
               <span className="text-zinc-100">{activity.title}</span>
               <span className="text-zinc-400 text-sm ml-auto">
-                {activity.time}
+                {activity.occurs_at}
               </span>
             </div>
           ))}
