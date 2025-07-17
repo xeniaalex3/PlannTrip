@@ -9,17 +9,16 @@ import DatePicker from '../../../../components/ui/DatePicket/DatePicket'
 export default function CreateActivityModal({
   handleCloseActivityModal,
   eventStartDate,
-  setEventStartDate,
-  onCreateActivity
+  setEventStartDate
 }: CreateActivityModalProps) {
   const [title, setTitle] = useState('')
-  const [date, setDate] = useState('')
+  const [occurs, setOccurs] = useState('')
   const [time, setTime] = useState('')
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
 
-   useEffect(() => {
+  useEffect(() => {
     if (eventStartDate) {
-      setDate(eventStartDate.toLocaleDateString('fr-FR'))
+      setOccurs(eventStartDate.toLocaleDateString('fr-FR'))
     }
   }, [eventStartDate])
 
@@ -33,23 +32,10 @@ export default function CreateActivityModal({
 
   function handleSubmitCreateNewActivity(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    if (!time || !date) return
+    if (!time || !occurs) return
 
-    const id = Date.now();
-
-    const newActivity = {
-      id,
-      title,
-      time,
-      date,
-      done: false
-    }
-
-   onCreateActivity(newActivity)
-   
-    e.currentTarget.reset();
+    e.currentTarget.reset()
     handleCloseActivityModal()
-    
   }
 
   return (
@@ -87,8 +73,8 @@ export default function CreateActivityModal({
             <InputWrapper
               type="text"
               name="date"
-              value={date}
-              onChange={e => setDate(e.target.value)}
+              value={occurs}
+              onChange={e => setOccurs(e.target.value)}
               placeholder="Date"
               className="bg-transparent text-lg placeholder-zinc-400 outline-none"
             />

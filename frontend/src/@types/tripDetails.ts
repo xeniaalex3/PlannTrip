@@ -3,7 +3,7 @@ import { type Participant } from './guests'
 import { type Links } from './links'
 
 export interface LinksContentProps {
-  links: Links[];
+  links: Links[]
 }
 
 export interface CreateLinkModalProps {
@@ -19,7 +19,6 @@ export interface CreateActivityModalProps {
   handleCloseActivityModal: () => void
   eventStartDate: Date | undefined
   setEventStartDate: (date: Date | undefined) => void
-  onCreateActivity: (activity: Activities) => void
 }
 
 export interface GuestsContentProps {
@@ -29,5 +28,4 @@ export interface GuestsContentProps {
 
 export interface CreateGuestModalProps {
   handleCloseGuestModal: () => void
-  onCreateGuest: (guest: Participant) => void
 }
