@@ -13,13 +13,13 @@ export default function CreateActivityModal({
   onCreateActivity
 }: CreateActivityModalProps) {
   const [title, setTitle] = useState('')
-  const [date, setDate] = useState('')
+  const [occurs, setOccurs] = useState('')
   const [time, setTime] = useState('')
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
 
    useEffect(() => {
     if (eventStartDate) {
-      setDate(eventStartDate.toLocaleDateString('fr-FR'))
+      setOccurs(eventStartDate.toLocaleDateString('fr-FR'))
     }
   }, [eventStartDate])
 
@@ -33,7 +33,7 @@ export default function CreateActivityModal({
 
   function handleSubmitCreateNewActivity(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    if (!time || !date) return
+    if (!time || !occurs) return
 
     const id = Date.now();
 
@@ -41,7 +41,7 @@ export default function CreateActivityModal({
       id,
       title,
       time,
-      date,
+      occurs,
       done: false
     }
 
@@ -87,8 +87,8 @@ export default function CreateActivityModal({
             <InputWrapper
               type="text"
               name="date"
-              value={date}
-              onChange={e => setDate(e.target.value)}
+              value={occurs}
+              onChange={e => setOccurs(e.target.value)}
               placeholder="Date"
               className="bg-transparent text-lg placeholder-zinc-400 outline-none"
             />

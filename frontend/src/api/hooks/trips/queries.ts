@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { api } from '../../client'
 import type { Trip } from '../../../@types/trips'
+import { useParams } from 'react-router-dom'
 
 export function useTrips() {
   return useQuery({
@@ -21,4 +22,9 @@ export function useTrip(tripId: string) {
     },
     enabled: !!tripId,
   })
+}
+
+export function useTripId(): string | undefined {
+  const params = useParams<{ id?: string; tripId?: string }>()
+  return params.id ?? params.tripId
 }

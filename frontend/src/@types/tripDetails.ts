@@ -29,5 +29,4 @@ export interface GuestsContentProps {
 
 export interface CreateGuestModalProps {
   handleCloseGuestModal: () => void
-  onCreateGuest: (guest: Participant) => void
 }
