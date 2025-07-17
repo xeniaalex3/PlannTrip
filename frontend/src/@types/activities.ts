@@ -1,5 +1,3 @@
-
-
 export interface Activities {
   id: number;
   title: string;

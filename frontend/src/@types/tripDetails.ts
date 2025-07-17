@@ -3,7 +3,7 @@ import { type Participant } from './guests'
 import { type Links } from './links'
 
 export interface LinksContentProps {
-  links: Links[];
+  links: Links[]
 }
 
 export interface CreateLinkModalProps {
