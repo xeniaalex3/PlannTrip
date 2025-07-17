@@ -46,10 +46,6 @@ export default function TripDetails() {
 
   // Activities
 
-  function handleCreateActivity(newActivity: Activities) {
-    setActivities(prev => [...prev, newActivity])
-  }
-
   function toggleActivityDone(id: number) {
     setActivities(prev =>
       prev.map(activity =>
@@ -59,10 +55,6 @@ export default function TripDetails() {
   }
 
   // Guests
-
-  function handleCreateGuest(newGuest: Participant) {
-    setGuests(prev => [...prev, newGuest])
-  }
 
   function toggleGuestDone(id: number) {
     setGuests(prev =>
@@ -128,10 +120,7 @@ export default function TripDetails() {
         <CreateLinkModal handleCloseLinkModal={handleCloseLinkModal} />
       )}
       {openGuestModal && (
-        <CreateGuestModal
-          handleCloseGuestModal={handleCloseGuestModal}
-          onCreateGuest={handleCreateGuest}
-        />
+        <CreateGuestModal handleCloseGuestModal={handleCloseGuestModal} />
       )}
 
       {openActivityModal && (
@@ -139,7 +128,6 @@ export default function TripDetails() {
           handleCloseActivityModal={handleCloseActivityModal}
           eventStartDate={eventStartDate}
           setEventStartDate={setEventStartDate}
-          onCreateActivity={handleCreateActivity}
         />
       )}
     </div>
