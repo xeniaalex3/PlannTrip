@@ -19,7 +19,6 @@ export interface CreateActivityModalProps {
   handleCloseActivityModal: () => void
   eventStartDate: Date | undefined
   setEventStartDate: (date: Date | undefined) => void
-  onCreateActivity: (activity: Activities) => void
 }
 
 export interface GuestsContentProps {

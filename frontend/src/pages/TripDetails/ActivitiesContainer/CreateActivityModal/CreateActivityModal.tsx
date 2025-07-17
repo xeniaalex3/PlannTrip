@@ -9,15 +9,14 @@ import DatePicker from '../../../../components/ui/DatePicket/DatePicket'
 export default function CreateActivityModal({
   handleCloseActivityModal,
   eventStartDate,
-  setEventStartDate,
-  onCreateActivity
+  setEventStartDate
 }: CreateActivityModalProps) {
   const [title, setTitle] = useState('')
   const [occurs, setOccurs] = useState('')
   const [time, setTime] = useState('')
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
 
-   useEffect(() => {
+  useEffect(() => {
     if (eventStartDate) {
       setOccurs(eventStartDate.toLocaleDateString('fr-FR'))
     }
@@ -35,21 +34,8 @@ export default function CreateActivityModal({
     e.preventDefault()
     if (!time || !occurs) return
 
-    const id = Date.now();
-
-    const newActivity = {
-      id,
-      title,
-      time,
-      occurs,
-      done: false
-    }
-
-   onCreateActivity(newActivity)
-   
-    e.currentTarget.reset();
+    e.currentTarget.reset()
     handleCloseActivityModal()
-    
   }
 
   return (
