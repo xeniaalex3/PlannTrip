@@ -1,4 +1,4 @@
-import { type FormEvent } from 'react'
+import { type FormEvent, useState } from 'react'
 import ModalWrapper from '../../ui/ModalWrapper/ModalWrapper'
 import { User, Mail } from 'lucide-react'
 import InputWrapper from '../../ui/form/InputWrapper/InputWrapper'
@@ -21,6 +21,7 @@ export default function ConfirmTripModal({
   const navigate = useNavigate()
   const { tripLocation, eventStartAndEndDates } = useTrip()
   const createTrip = useCreateTrip()
+  const [isLoading, setIsLoading] = useState(false);
 
   const formattedDates = formatDateRange(eventStartAndEndDates, ' au ')
 
@@ -48,6 +49,8 @@ export default function ConfirmTripModal({
     }
 
     try {
+      setIsLoading(true) 
+
       const response = await createTrip.mutateAsync({
         destination: tripLocation,
         starts_at: eventStartAndEndDates.from.toISOString(),
@@ -75,7 +78,9 @@ export default function ConfirmTripModal({
     } catch (error) {
       console.error(error)
       toast.error('Erreur lors de la création du voyage.')
-    }
+    } finally {
+    setIsLoading(false)
+  }
   }
 
   return (
@@ -115,7 +120,12 @@ export default function ConfirmTripModal({
             className="bg-transparent text-lg placeholder-zinc-400 outline-none w-90"
           />
         </div>
-        <CustomButton type="submit" fullWidth>
+        <CustomButton 
+        type="submit" 
+        fullWidth
+        isLoading={isLoading}
+        message="Création du voyage..."
+        >
           Confirmer la création du voyage
         </CustomButton>
       </form>
