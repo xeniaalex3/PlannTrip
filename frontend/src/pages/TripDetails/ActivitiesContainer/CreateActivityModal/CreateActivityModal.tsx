@@ -5,6 +5,9 @@ import InputWrapper from '../../../../components/ui/form/InputWrapper/InputWrapp
 import CustomButton from '../../../../components/ui/Button/CustomButton/CustomButton'
 import { type CreateActivityModalProps } from '../../../../@types/tripDetails'
 import DatePicker from '../../../../components/ui/DatePicket/DatePicket'
+import { useCreateActivity } from '../../../../api/hooks/activities/mutations'
+import { useTripId } from '../../../../api/hooks/trips/queries'
+import { toast } from 'react-toastify'
 
 export default function CreateActivityModal({
   handleCloseActivityModal,
@@ -15,10 +18,13 @@ export default function CreateActivityModal({
   const [occurs, setOccurs] = useState('')
   const [time, setTime] = useState('')
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const createActivity = useCreateActivity()
+  const tripId = useTripId()
 
   useEffect(() => {
     if (eventStartDate) {
-      setOccurs(eventStartDate.toLocaleDateString('fr-FR'))
+      setOccurs(eventStartDate.toISOString())
     }
   }, [eventStartDate])
 
@@ -30,12 +36,40 @@ export default function CreateActivityModal({
     setIsDatePickerOpen(false)
   }
 
-  function handleSubmitCreateNewActivity(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmitCreateNewActivity(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    if (!time || !occurs) return
 
-    e.currentTarget.reset()
-    handleCloseActivityModal()
+    if (!time || !occurs) {
+      toast.error('Veuillez remplir tous les champs.')
+      return
+    }
+
+    if (!tripId) {
+      toast.error('ID du voyage manquant.')
+      return
+    }
+
+    try {
+      setIsLoading(true)
+
+      await createActivity.mutateAsync({
+        title,
+        time,
+        occurs_at: occurs,
+        trip_id: Number(tripId)
+      })
+      toast.success("L'activité a été ajoutée avec succès !")
+
+      setTime('')
+      setTitle('')
+      setOccurs('')
+      handleCloseActivityModal()
+    } catch (error) {
+      console.error(error)
+      toast.error('Une erreur est survenue lors de la création de l’activité.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -100,7 +134,12 @@ export default function CreateActivityModal({
           </div>
         </div>
 
-        <CustomButton type="submit" fullWidth>
+        <CustomButton
+          type="submit"
+          fullWidth
+          isLoading={isLoading}
+          message="Ajout de l'activité..."
+        >
           Enregistrer l'activité
         </CustomButton>
       </form>
