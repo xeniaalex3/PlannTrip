@@ -1,4 +1,4 @@
-import { useState, type FormEvent, useEffect } from 'react'
+import { useState, type FormEvent, useEffect} from 'react'
 import { Calendar, Clock, Tag } from 'lucide-react'
 import ModalWrapper from '../../../../components/ui/ModalWrapper/ModalWrapper'
 import InputWrapper from '../../../../components/ui/form/InputWrapper/InputWrapper'
@@ -8,6 +8,7 @@ import DatePicker from '../../../../components/ui/DatePicket/DatePicket'
 import { useCreateActivity } from '../../../../api/hooks/activities/mutations'
 import { useTripId } from '../../../../api/hooks/trips/queries'
 import { toast } from 'react-toastify'
+import { formatSingleDate } from '../../../../utils/date'
 
 export default function CreateActivityModal({
   handleCloseActivityModal,
@@ -15,7 +16,7 @@ export default function CreateActivityModal({
   setEventStartDate
 }: CreateActivityModalProps) {
   const [title, setTitle] = useState('')
-  const [occurs, setOccurs] = useState('')
+ const [occurs, setOccurs] = useState<Date | undefined>(undefined)
   const [time, setTime] = useState('')
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -23,10 +24,10 @@ export default function CreateActivityModal({
   const tripId = useTripId()
 
   useEffect(() => {
-    if (eventStartDate) {
-      setOccurs(eventStartDate.toISOString())
-    }
-  }, [eventStartDate])
+  if (eventStartDate) {
+    setOccurs(eventStartDate)
+  }
+}, [eventStartDate])
 
   function openDatePicker() {
     setIsDatePickerOpen(true)
@@ -44,11 +45,6 @@ export default function CreateActivityModal({
       return
     }
 
-    if (!tripId) {
-      toast.error('ID du voyage manquant.')
-      return
-    }
-
     try {
       setIsLoading(true)
 
@@ -62,7 +58,8 @@ export default function CreateActivityModal({
 
       setTime('')
       setTitle('')
-      setOccurs('')
+      setOccurs(undefined)
+      setEventStartDate(undefined)
       handleCloseActivityModal()
     } catch (error) {
       console.error(error)
@@ -107,8 +104,9 @@ export default function CreateActivityModal({
             <InputWrapper
               type="text"
               name="date"
-              value={occurs}
-              onChange={e => setOccurs(e.target.value)}
+              value={occurs ? formatSingleDate(occurs) : ''}
+            onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
+              readOnly
               placeholder="Date"
               className="bg-transparent text-lg placeholder-zinc-400 outline-none"
             />

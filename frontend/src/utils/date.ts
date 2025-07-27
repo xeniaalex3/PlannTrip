@@ -14,3 +14,11 @@ export function formatDateRange(
   }
   return fallback;
 }
+
+export function formatSingleDate(
+  date: Date | undefined,
+  fallback: string = ''
+): string {
+  if (!date) return fallback
+  return format(date, 'dd/MM/yyyy')
+}

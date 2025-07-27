@@ -1,14 +1,15 @@
 import { CircleCheck, CircleDashed } from 'lucide-react'
 import { type ActivityContentProps } from '../../../../@types/tripDetails'
 import { type Activities } from '../../../../@types/activities'
+import { formatSingleDate } from '../../../../utils/date'
 
-// Fonction de regroupement par date
 function groupActivitiesByDate(activities: Activities[]) {
   return activities.reduce<Record<string, Activities[]>>((acc, activity) => {
-    if (!acc[activity.occurs_at]) {
-      acc[activity.occurs_at] = []
+    const dateKey = new Date(activity.occurs_at).toISOString().split('T')[0] // 'YYYY-MM-DD'
+    if (!acc[dateKey]) {
+      acc[dateKey] = []
     }
-    acc[activity.occurs_at].push(activity)
+    acc[dateKey].push(activity)
     return acc
   }, {})
 }
@@ -17,8 +18,6 @@ export default function ActivityContent({
   activities,
   onToggleDone,
 }: ActivityContentProps) {
-  const grouped = groupActivitiesByDate(activities)
-
   if (activities.length === 0) {
     return (
       <p className="text-zinc-500 text-sm">
@@ -27,15 +26,18 @@ export default function ActivityContent({
     )
   }
 
+  const grouped = groupActivitiesByDate(activities)
+
   return (
     <div className="flex flex-col gap-12">
-      {Object.entries(grouped).map(([ occurs_at, activitiesOnDate]) => (
-        <div key={occurs_at} className="space-y-3">
-          <div className="flex gap-2 items-baseline">
-            <span className="text-zinc-300 font-semibold text-xl">
-              Jour <span className="text-lg text-zinc-400 ml-2">{occurs_at}</span>
+      {Object.entries(grouped).map(([dateKey, activitiesOnDate]) => (
+        <div key={dateKey} className="space-y-3">
+          <h3 className="text-zinc-300 font-semibold text-xl">
+            Jour{' '}
+            <span className="text-lg text-zinc-400 ml-2">
+              {formatSingleDate(new Date(dateKey))}
             </span>
-          </div>
+          </h3>
 
           {activitiesOnDate.map((activity) => (
             <div
@@ -49,9 +51,11 @@ export default function ActivityContent({
                   <CircleDashed className="size-5 text-zinc-400" />
                 )}
               </button>
+
               <span className="text-zinc-100">{activity.title}</span>
+
               <span className="text-zinc-400 text-sm ml-auto">
-                {activity.occurs_at}
+                {activity.time}
               </span>
             </div>
           ))}
