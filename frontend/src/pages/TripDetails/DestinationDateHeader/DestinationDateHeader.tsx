@@ -1,17 +1,25 @@
 import { Calendar, MapPin, Settings2 } from 'lucide-react'
 import CustomButton from '../../../components/ui/Button/CustomButton/CustomButton'
-import { useTrip } from '../../../context/TripContext'
 import { formatDateRange } from '../../../utils/date'
+import { type Trip } from '../../../@types/trips'
 
-export default function DestinationDateHeader() {
-  const { tripLocation, eventStartAndEndDates } = useTrip()
-  const formattedDates = formatDateRange(eventStartAndEndDates, ' au ')
+interface DestinationDateHeaderProps {
+  trip: Trip
+}
+
+export default function DestinationDateHeader({
+  trip
+}: DestinationDateHeaderProps) {
+  const formattedDates = formatDateRange(
+    { from: new Date(trip.starts_at), to: new Date(trip.ends_at) },
+    ' au '
+  )
 
   return (
     <div className="px-4 h-16 rounded-xl bg-zinc-900 shadow-[var(--shadow)] flex items-center justify-between">
       <div className="flex items-center gap-2">
         <MapPin className="size-5 text-zinc-400" />
-        <span className="text-lg text-zinc-100">{tripLocation}</span>
+        <span className="text-lg text-zinc-100">{trip.destination}</span>
       </div>
       <div className="flex items-center gap-5">
         <div className="flex items-center gap-2">

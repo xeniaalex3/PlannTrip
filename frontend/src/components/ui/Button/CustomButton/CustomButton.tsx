@@ -1,5 +1,6 @@
 import type { ComponentProps, ReactNode } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
+import Loading from '../../Loading/Loading';
 
 const buttonVariants = tv({
   base: 'rounded-lg px-5 py-2  font-medium flex justify-center items-center gap-2  cursor-pointer',
@@ -23,6 +24,8 @@ interface CustomButtonProps
     VariantProps<typeof buttonVariants> {
   children: ReactNode
   type: 'submit' | 'button' | 'reset'
+  isLoading?: boolean
+  message?: string
 }
 
 export default function CustomButton({
@@ -30,6 +33,8 @@ export default function CustomButton({
   type,
   color,
   fullWidth,
+  isLoading = false,
+  message,
   ...props
 }: CustomButtonProps) {
   return (
@@ -38,7 +43,14 @@ export default function CustomButton({
       type={type}
       className={buttonVariants({ color, fullWidth })}
     >
-      {children}
+      {isLoading ? (
+        <span className="flex items-center gap-2">
+          <Loading />
+          <span>{message}</span>
+        </span>
+      ) : (
+        children
+      )}
     </button>
   )
 }

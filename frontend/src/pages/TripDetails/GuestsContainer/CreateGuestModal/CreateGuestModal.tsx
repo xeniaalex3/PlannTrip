@@ -13,6 +13,7 @@ export default function CreateGuestModal({
 }: CreateGuestModalProps) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [isLoading, setIsLoading] = useState(false);
   const createGuest = useCreateParticipant()
   const tripId = useTripId()
 
@@ -29,6 +30,7 @@ export default function CreateGuestModal({
     }
 
     try {
+      setIsLoading(true)
       await createGuest.mutateAsync({
         name,
         email,
@@ -46,8 +48,10 @@ export default function CreateGuestModal({
     } catch (error) {
       console.error(error)
       toast.error('Erreur lors de la création du participant.')
-    }
-  }
+    } finally {
+    setIsLoading(false)
+  }}
+
 
   return (
     <ModalWrapper onClick={handleCloseGuestModal}>
@@ -100,7 +104,12 @@ export default function CreateGuestModal({
             onChange={e => setEmail(e.target.value)}
           />
         </div>
-        <CustomButton type="submit" fullWidth>
+        <CustomButton 
+        type="submit" 
+        fullWidth
+        isLoading={isLoading}
+        message="Confirmation en cours..."
+        >
           Confirmer ma présence
         </CustomButton>
       </form>

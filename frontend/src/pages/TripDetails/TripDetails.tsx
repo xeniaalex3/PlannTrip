@@ -66,7 +66,7 @@ export default function TripDetails() {
 
   return (
     <div className="max-w-6xl px-6 py-10 mx-auto space-y-8">
-      <DestinationDateHeader />
+      {trip && <DestinationDateHeader trip={trip} />}
       <main className="flex gap-16 px-6">
         <div className="flex-1 space-y-12">
           <div className="flex items-center justify-between">
