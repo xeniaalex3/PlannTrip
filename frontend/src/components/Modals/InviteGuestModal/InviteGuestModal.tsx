@@ -45,11 +45,11 @@ export default function InviteGuestModal({
   return (
     <ModalWrapper onClick={closeGuestModal}>
       <div>
-        <div className="space-y-2 flex flex-col items-start">
-          <h2 className="text-zinc-200 text-lg font-semibold">
+        <div className="space-y-2 flex flex-col items-start xs:max-sm:justify-start xs:max-sm:items-start">
+          <h2 className="text-zinc-200 text-lg font-semibold xs:max-sm:text-base xs:max-sm:space-y-1">
             Sélectionner les invités
           </h2>
-          <p className="text-zinc-400 text-sm">
+          <p className="flex text-zinc-400 text-sm xs:max-sm:text-left" >
             Les invités recevront un courrier électronique confirmant leur
             participation au voyage.
           </p>
@@ -75,19 +75,19 @@ export default function InviteGuestModal({
         <div className="w-full h-px bg-zinc-700 mb-3" />
         <form
           action=""
-          className="bg-zinc-950 h-14 w-[592px] flex justify-baseline items-center px-2 rounded-lg"
+          className="bg-zinc-950 h-14 w-[592px] flex justify-baseline items-center px-2 rounded-lg xs:max-sm:w-[340px] xs:max-sm:flex-col xs:max-sm:justify-start xs:max-sm:items-start xs:max-sm:h-32"
           onSubmit={handleAddNewEmailToInvite}
         >
           <div className="flex items-center gap-2 flex-1">
-            <AtSign className="text-zinc-400 size-5" />
+            <AtSign className="text-zinc-400 size-5 xs:max-sm:size-4" />
             <InputWrapper
               type="email"
               name="email"
               placeholder="Saisir l'adresse e-mail de l'invité"
-              className="bg-transparent text-lg placeholder-zinc-400 outline-none w-90"
+              className="bg-transparent text-lg placeholder-zinc-400 outline-none w-90 xs:max-sm:text-base"
             />
           </div>
-          <CustomButton type="submit">
+          <CustomButton type="submit" className='xs:max-sm:w-full xs:max-sm:mb-3'>
             Inviter
             <Plus className="size-5 text-lime-950" />
           </CustomButton>
