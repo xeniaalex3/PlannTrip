@@ -39,6 +39,7 @@ frontend/
     styles/          # Global styles
     utils/           # Utility functions
 ```
+
 <br>
 
 ## 📦 Getting Started
