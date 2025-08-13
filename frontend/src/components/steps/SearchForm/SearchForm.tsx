@@ -72,7 +72,7 @@ export default function SearchForm({
       )}
       <div className="w-px h-6 bg-zinc-600 xs:max-sm:hidden" />
       {inputOpen ? (
-        <CustomButton type="button" color="gray" onClick={closeGuestInput} className="xs:max-sm:mb-2">
+        <CustomButton type="button" color="gray" onClick={closeGuestInput} className="xs:max-sm:mb-2 xs:max-sm:w-full">
           Modifier lieu/date
           <Settings2 className="size-5 text-zinc-200" />
         </CustomButton>
