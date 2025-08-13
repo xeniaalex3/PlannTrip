@@ -36,7 +36,7 @@ frontend/
     routes/          # Routing setup
     styles/          # Global styles
     utils/           # Utility functions
-
+```
 
 ## 📦 Getting Started
 
