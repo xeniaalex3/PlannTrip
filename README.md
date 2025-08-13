@@ -1,57 +1,86 @@
 # PlannTrip
 
-Le PlannTrip est une application web destiné à faciliter l'organisation de voyages en groupe. Dotée d'une interface intuitive et moderne, elle permet aux utilisateurs de créer des plans de voyage personnalisés, de choisir des destinations, de fixer des dates et d'inviter des amis par e-mail à collaborer à l'organisation.
+PlannTrip is a web application for planning trips, managing guests, activities, and sharing useful links. Built with React, TypeScript, and Vite, it provides a modern, user-friendly interface for organizing travel details.
 
 🔗 Live demo: [plannTrip](https://planntrip.netlify.app/)
 
 ## 🧰 Features
 
-- 🧭 Création de voyages avec titre, dates et destinations
-- 🧑‍🤝‍🧑 Invitation de participants par e-mail
+- 🧭 Search and select trip location and dates
+- 🧑‍🤝‍🧑 Add and manage guests
 - 📅 Ajout d'activités avec date et heure
-- 🔗 Création de liens utiles (par exemple, hébergement, transport, événements)
-- ✅ Confirmation de la participation des invités
-- 🧠 Synchronisation et collaboration en temps réel
+- 🔗 Create and manage activities
+- ✅ Share useful links
+- 🧠 Responsive design for mobile and desktop
 
 <br>
 
-## 🧑‍💻 Technologies
+## 🧑‍💻 Technologies Used
 
-### Frontend :
-
-- React 19
+- React
+- TypeScript
 - Vite
 - Tailwind CSS
-- React Router
-- date-fns
-- react-day-picker
-- react-toastify
-- CI / CD 
+- Netlify (deployment)
 - Github Actions
+
+## Project Structure
+```
+frontend/
+  src/
+    components/      # UI and modal components
+    context/         # React context for trip state
+    pages/           # Main pages and containers
+    api/             # API client and hooks
+    assets/          # Images and static assets
+    routes/          # Routing setup
+    styles/          # Global styles
+    utils/           # Utility functions
+
 
 ## 📦 Getting Started
 
-Tout d'abord, clonez le dépôt :
+### Prerequisites
+- Node.js (v18 or higher recommended)
+- npm or yarn
+
+### Installation
+1. Clone the repository:
 
 ```bash
-git clone https://github.com/xeniaalex3/PlannTrip.git
-cd PlannTrip
-```
+   git clone https://github.com/xeniaalex3/PlannTrip.git
+   cd PlannTrip/frontend
 
-Installez ensuite les dépendances :
+```
+2. Install dependencies:
 
 ```bash
-npm install
+   npm install
+   
+   yarn install
 ```
 
-Démarrer le serveur de développement :
-
+### Running the App
 ```bash
 npm run dev
-# or
+
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+The app will be available at `http://localhost:5173` (default Vite port).
+
+### Building for Production
+
+```bash
+npm run build
+
+yarn build
+```
+
+### Deployment
+The project is configured for deployment on Netlify. See `netlify.toml` for settings.
+
+## Contributing
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+This project is licensed under the MIT License.
