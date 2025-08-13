@@ -12,7 +12,7 @@ const buttonVariants = tv({
     fullWidth: {
       true: 'w-full',
       false: ''
-    }
+    },
   },
   defaultVariants: {
     color: 'yellow'
@@ -26,6 +26,7 @@ interface CustomButtonProps
   type: 'submit' | 'button' | 'reset'
   isLoading?: boolean
   message?: string
+  className?: string;
 }
 
 export default function CustomButton({
@@ -35,13 +36,14 @@ export default function CustomButton({
   fullWidth,
   isLoading = false,
   message,
-  ...props
+      className, 
+      ...props
 }: CustomButtonProps) {
   return (
     <button
       {...props}
       type={type}
-      className={buttonVariants({ color, fullWidth })}
+      className={`${buttonVariants({ color, fullWidth })}${className ? ` ${className}` : ''}`}
     >
       {isLoading ? (
         <span className="flex items-center gap-2">

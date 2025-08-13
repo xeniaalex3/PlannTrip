@@ -36,7 +36,7 @@ export default function SearchForm({
   const displayedDate = formatDateRange(eventStartAndEndDates)
 
   return (
-    <div className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center w-[42rem] shadow-[var(--shadow)] gap-3">
+    <div className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center w-[42rem] shadow-[var(--shadow)] gap-3 xs:max-sm:flex-col xs:max-sm:h-46 xs:max-sm:w-[23rem] xs:max-sm:items-start xs:max-sm:space-y-1">
       <div className="flex items-center gap-2 flex-1">
         <MapIcon className="text-zinc-400 size-5" />
         <InputWrapper
@@ -70,14 +70,14 @@ export default function SearchForm({
           mode="range"
         />
       )}
-      <div className="w-px h-6 bg-zinc-600" />
+      <div className="w-px h-6 bg-zinc-600 xs:max-sm:hidden" />
       {inputOpen ? (
-        <CustomButton type="button" color="gray" onClick={closeGuestInput}>
+        <CustomButton type="button" color="gray" onClick={closeGuestInput} className="xs:max-sm:mb-2">
           Modifier lieu/date
           <Settings2 className="size-5 text-zinc-200" />
         </CustomButton>
       ) : (
-        <CustomButton type="submit" onClick={openGuestInput}>
+        <CustomButton type="submit" onClick={openGuestInput} className="xs:max-sm:mb-4 xs:max-sm:w-full">
           Continuer
           <ArrowRight className="size-5 text-lime-950" />
         </CustomButton>
