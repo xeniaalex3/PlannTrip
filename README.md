@@ -24,6 +24,8 @@ PlannTrip is a web application for planning trips, managing guests, activities, 
 - Netlify (deployment)
 - Github Actions
 
+<br>
+
 ## Project Structure
 ```
 frontend/
@@ -37,6 +39,8 @@ frontend/
     styles/          # Global styles
     utils/           # Utility functions
 ```
+
+<br>
 
 ## 📦 Getting Started
 
@@ -79,8 +83,12 @@ yarn build
 ### Deployment
 The project is configured for deployment on Netlify. See `netlify.toml` for settings.
 
+<br>
+
 ## Contributing
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+<br>
 
 ## License
 This project is licensed under the MIT License.
