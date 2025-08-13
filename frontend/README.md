@@ -1,54 +1,73 @@
-# React + TypeScript + Vite
+PlannTrip is a web application for planning trips, managing guests, activities, and sharing useful links. Built with React, TypeScript, and Vite, it provides a modern, user-friendly interface for organizing travel details.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
+- Search and select trip location and dates
+- Add and manage guests
+- Create and manage activities
+- Share useful links
+- Responsive design for mobile and desktop
 
-Currently, two official plugins are available:
+## Technologies Used
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Netlify (deployment)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Project Structure
+```
+frontend/
+  src/
+    components/      # UI and modal components
+    context/         # React context for trip state
+    pages/           # Main pages and containers
+    api/             # API client and hooks
+    assets/          # Images and static assets
+    routes/          # Routing setup
+    styles/          # Global styles
+    utils/           # Utility functions
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Getting Started
+### Prerequisites
+- Node.js (v18 or higher recommended)
+- npm or yarn
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Installation
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/xeniaalex3/PlannTrip.git
+   cd PlannTrip/frontend
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   # or
+   yarn install
+   ```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### Running the App
+```sh
+npm run dev
+# or
+yarn dev
 ```
+The app will be available at `http://localhost:5173` (default Vite port).
+
+### Building for Production
+```sh
+npm run build
+# or
+yarn build
+```
+
+### Deployment
+The project is configured for deployment on Netlify. See `netlify.toml` for settings.
+
+## Contributing
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+This project is licensed under the MIT License.
+
+
