@@ -68,10 +68,10 @@ export default function TripDetails() {
   return (
     <div className="max-w-6xl px-6 py-10 mx-auto space-y-8">
       {trip && <DestinationDateHeader trip={trip} />}
-      <main className="flex gap-16 px-6 xs:max-sm:flex-col xs:max-sm:max-h-svh xs:max-sm:overflow-auto">
-        <div className="flex-1 space-y-12 xs:max-sm:space-y-8">
+      <main className="flex gap-16 px-6 xs:max-sm:flex-col xs:max-sm:max-h-svh xs:max-sm:overflow-auto sm:max-md:flex-col sm:max-md:max-h-svh sm:max-md:overflow-auto">
+        <div className="flex-1 space-y-12 xs:max-sm:space-y-8 sm:max-md:space-y-8">
           <div className="flex items-center justify-between xs:max-sm:flex-col xs:max-sm:justify-start xs:max-sm:items-start xs:max-sm:space-y-3">
-            <h2 className="text-3xl font-semibold text-zinc-50 xs:max-sm:text-lg">
+            <h2 className="text-3xl font-semibold text-zinc-50 xs:max-sm:text-lg sm:max-md:text-xl">
               Activités
             </h2>
             <CustomButton
@@ -83,7 +83,7 @@ export default function TripDetails() {
               Enregistrer l'activité
             </CustomButton>
           </div>
-          <div className="space-y-3 xs:max-sm:max-h-[14rem] xs:max-sm:overflow-auto">
+          <div className="space-y-3 xs:max-sm:max-h-[14rem] xs:max-sm:overflow-auto sm:max-md:max-h-[20rem] sm:max-md:overflow-auto">
             <ActivityContent
               activities={activities}
               onToggleDone={toggleActivityDone}
@@ -96,7 +96,7 @@ export default function TripDetails() {
             <h3 className="text-zinc-100 font-semibold text-lg">
               Liens importants
             </h3>
-            <div className="xs:max-sm:max-h-[14rem] xs:max-sm:overflow-auto">
+            <div className="xs:max-sm:max-h-[14rem] xs:max-sm:overflow-auto sm:max-md:max-h-[16rem] sm:max-md:overflow-auto">
               <LinksContent links={links} />
             </div>
 
@@ -114,7 +114,7 @@ export default function TripDetails() {
           <div className="w-full h-px bg-zinc-700" />
           <div className="space-y-6">
             <h3 className="text-zinc-100 font-semibold text-lg">Invités</h3>
-            <div className="xs:max-sm:max-h-[14rem] xs:max-sm:overflow-auto">
+            <div className="xs:max-sm:max-h-[14rem] xs:max-sm:overflow-auto sm:max-md:max-h-[16rem] sm:max-md:overflow-auto">
               <GuestsContent guests={guests} onToggleDone={toggleGuestDone} />
             </div>
 
