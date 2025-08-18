@@ -32,9 +32,9 @@ export default function ActivityContent({
     <div className="flex flex-col gap-12">
       {Object.entries(grouped).map(([dateKey, activitiesOnDate]) => (
         <div key={dateKey} className="space-y-3">
-          <h3 className="text-zinc-300 font-semibold text-xl">
+          <h3 className="text-zinc-300 font-semibold text-xl xs:max-sm:text-base">
             Jour{' '}
-            <span className="text-lg text-zinc-400 ml-2">
+            <span className="text-lg text-zinc-400 ml-2 xs:max-sm:text-base">
               {formatSingleDate(new Date(dateKey))}
             </span>
           </h3>

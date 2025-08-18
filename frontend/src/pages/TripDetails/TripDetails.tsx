@@ -67,16 +67,16 @@ export default function TripDetails() {
   return (
     <div className="max-w-6xl px-6 py-10 mx-auto space-y-8">
       {trip && <DestinationDateHeader trip={trip} />}
-      <main className="flex gap-16 px-6">
-        <div className="flex-1 space-y-12">
-          <div className="flex items-center justify-between">
-            <h2 className="text-3xl font-semibold text-zinc-50">Activités</h2>
-            <CustomButton type="button" onClick={handleOpenActivityModal}>
-              <Plus className="size-5 text-lime-950" />
+      <main className="flex gap-16 px-6 xs:max-sm:flex-col xs:max-sm:max-h-svh xs:max-sm:overflow-auto">
+        <div className="flex-1 space-y-12 xs:max-sm:space-y-8">
+          <div className="flex items-center justify-between xs:max-sm:flex-col xs:max-sm:justify-start xs:max-sm:items-start xs:max-sm:space-y-3">
+            <h2 className="text-3xl font-semibold text-zinc-50 xs:max-sm:text-lg">Activités</h2>
+            <CustomButton type="button" onClick={handleOpenActivityModal} className='xs:max-sm:text-sm'>
+              <Plus className="size-5 text-lime-950 xs:max-sm:size-4" />
               Enregistrer l'activité
             </CustomButton>
           </div>
-          <div className="space-y-3">
+          <div className="space-y-3 xs:max-sm:max-h-[14rem] xs:max-sm:overflow-auto">
             <ActivityContent
               activities={activities}
               onToggleDone={toggleActivityDone}
