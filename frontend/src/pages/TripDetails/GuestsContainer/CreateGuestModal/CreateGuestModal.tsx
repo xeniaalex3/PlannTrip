@@ -7,15 +7,22 @@ import { type CreateGuestModalProps } from '../../../../@types/tripDetails'
 import { useCreateParticipant } from '../../../../api/hooks/guests/mutations'
 import { toast } from 'react-toastify'
 import { useTripId } from '../../../../api/hooks/trips/queries'
+import { formatDateRange } from '../../../../utils/date'
 
 export default function CreateGuestModal({
-  handleCloseGuestModal
+  handleCloseGuestModal,
+  trip
 }: CreateGuestModalProps) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false);
   const createGuest = useCreateParticipant()
   const tripId = useTripId()
+
+  const formattedDates = formatDateRange(
+    { from: new Date(trip.starts_at), to: new Date(trip.ends_at) },
+    ' au '
+  )
 
   async function handleSubmitCreateNewGuest(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -62,12 +69,10 @@ export default function CreateGuestModal({
         <div className="space-y-6">
           <p className="text-zinc-400 text-sm text-left">
             Vous avez été invité à participer à un voyage à{' '}
-            <span className="text-zinc-100 font-semibold">Florianópolis</span> ,
-            au <span className="text-zinc-100 font-semibold">Brésil</span> ,
-            <br />
+            <span className="text-zinc-100 font-semibold">{trip.destination}</span> ,
             du{' '}
             <span className="text-zinc-100 font-semibold">
-              16 au 27 août 2024
+              {formattedDates}
             </span>
             .
           </p>

@@ -1,6 +1,7 @@
 import { type Activities } from './activities'
 import { type Participant } from './guests'
 import { type Links } from './links'
+import type { Trip } from './trips'
 
 export interface LinksContentProps {
   links: Links[]
@@ -28,4 +29,5 @@ export interface GuestsContentProps {
 
 export interface CreateGuestModalProps {
   handleCloseGuestModal: () => void
+  trip: Trip
 }

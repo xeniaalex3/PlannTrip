@@ -134,8 +134,8 @@ export default function TripDetails() {
       {openLinkModal && (
         <CreateLinkModal handleCloseLinkModal={handleCloseLinkModal} />
       )}
-      {openGuestModal && (
-        <CreateGuestModal handleCloseGuestModal={handleCloseGuestModal} />
+      {openGuestModal && trip && (
+        <CreateGuestModal handleCloseGuestModal={handleCloseGuestModal} trip={trip} />
       )}
 
       {openActivityModal && (
