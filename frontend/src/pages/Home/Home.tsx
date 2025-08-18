@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="space-y-4">
+      <div className="space-y-4 sm:max-md:flex sm:max-md:items-center sm:max-md:justify-center">
         <SearchForm
           openGuestInput={openGuestInput}
           inputOpen={inputOpen}
