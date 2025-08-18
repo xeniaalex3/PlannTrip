@@ -9,6 +9,7 @@ import { useCreateActivity } from '../../../../api/hooks/activities/mutations'
 import { useTripId } from '../../../../api/hooks/trips/queries'
 import { toast } from 'react-toastify'
 import { formatSingleDate } from '../../../../utils/date'
+import { useQueryClient } from '@tanstack/react-query'
 
 export default function CreateActivityModal({
   handleCloseActivityModal,
@@ -22,6 +23,8 @@ export default function CreateActivityModal({
   const [isLoading, setIsLoading] = useState(false)
   const createActivity = useCreateActivity()
   const tripId = useTripId()
+
+  const queryClient = useQueryClient()
 
   useEffect(() => {
   if (eventStartDate) {
@@ -56,6 +59,8 @@ export default function CreateActivityModal({
       })
       toast.success("L'activité a été ajoutée avec succès !")
 
+      queryClient.invalidateQueries({ queryKey: ['activities', tripId] })
+     
       setTime('')
       setTitle('')
       setOccurs(undefined)
