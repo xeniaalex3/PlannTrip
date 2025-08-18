@@ -24,7 +24,7 @@ export default function TripDetails() {
   const [links, setLinks] = useState<Links[]>([])
 
   const { tripId } = useParams<{ tripId: string }>()
-  const { data: trip } = useTrip(tripId!)
+  const { data: trip, refetch } = useTrip(tripId!)
 
   useEffect(() => {
     if (trip) {
@@ -32,7 +32,8 @@ export default function TripDetails() {
       setGuests(trip.participants || [])
       setLinks(trip.links || [])
     }
-  }, [trip])
+    refetch()
+  }, [refetch, trip])
 
   // link
   const handleOpenLinkModal = () => setOpenLinkModal(true)
@@ -70,8 +71,14 @@ export default function TripDetails() {
       <main className="flex gap-16 px-6 xs:max-sm:flex-col xs:max-sm:max-h-svh xs:max-sm:overflow-auto">
         <div className="flex-1 space-y-12 xs:max-sm:space-y-8">
           <div className="flex items-center justify-between xs:max-sm:flex-col xs:max-sm:justify-start xs:max-sm:items-start xs:max-sm:space-y-3">
-            <h2 className="text-3xl font-semibold text-zinc-50 xs:max-sm:text-lg">Activités</h2>
-            <CustomButton type="button" onClick={handleOpenActivityModal} className='xs:max-sm:text-sm'>
+            <h2 className="text-3xl font-semibold text-zinc-50 xs:max-sm:text-lg">
+              Activités
+            </h2>
+            <CustomButton
+              type="button"
+              onClick={handleOpenActivityModal}
+              className="xs:max-sm:text-sm"
+            >
               <Plus className="size-5 text-lime-950 xs:max-sm:size-4" />
               Enregistrer l'activité
             </CustomButton>
@@ -89,28 +96,36 @@ export default function TripDetails() {
             <h3 className="text-zinc-100 font-semibold text-lg">
               Liens importants
             </h3>
-            <LinksContent links={links} />
+            <div className="xs:max-sm:max-h-[14rem] xs:max-sm:overflow-auto">
+              <LinksContent links={links} />
+            </div>
+
             <CustomButton
               type="button"
               color="gray"
               fullWidth
               onClick={handleOpenLinkModal}
+              className="xs:max-sm:text-sm"
             >
-              <Plus className="size-5 text-zinc-200" />
+              <Plus className="size-5 text-zinc-200 xs:max-sm:size-4" />
               Enregistrer un nouveau lien
             </CustomButton>
           </div>
           <div className="w-full h-px bg-zinc-700" />
           <div className="space-y-6">
             <h3 className="text-zinc-100 font-semibold text-lg">Invités</h3>
-            <GuestsContent guests={guests} onToggleDone={toggleGuestDone} />
+            <div className="xs:max-sm:max-h-[14rem] xs:max-sm:overflow-auto">
+              <GuestsContent guests={guests} onToggleDone={toggleGuestDone} />
+            </div>
+
             <CustomButton
               type="button"
               color="gray"
               fullWidth
               onClick={handleOpenGuestModal}
+              className="xs:max-sm:text-sm"
             >
-              <UserCog className="size-5 text-zinc-200" />
+              <UserCog className="size-5 text-zinc-200 xs:max-sm:size-4" />
               Gestion des invités
             </CustomButton>
           </div>
@@ -119,8 +134,8 @@ export default function TripDetails() {
       {openLinkModal && (
         <CreateLinkModal handleCloseLinkModal={handleCloseLinkModal} />
       )}
-      {openGuestModal && (
-        <CreateGuestModal handleCloseGuestModal={handleCloseGuestModal} />
+      {openGuestModal && trip && (
+        <CreateGuestModal handleCloseGuestModal={handleCloseGuestModal} trip={trip} />
       )}
 
       {openActivityModal && (

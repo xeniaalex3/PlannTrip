@@ -10,6 +10,7 @@ interface DestinationDateHeaderProps {
 export default function DestinationDateHeader({
   trip
 }: DestinationDateHeaderProps) {
+  
   const formattedDates = formatDateRange(
     { from: new Date(trip.starts_at), to: new Date(trip.ends_at) },
     ' au '
