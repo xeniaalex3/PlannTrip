@@ -70,8 +70,8 @@ export default function TripDetails() {
       {trip && <DestinationDateHeader trip={trip} />}
       <main className="flex gap-16 px-6 xs:max-sm:flex-col xs:max-sm:max-h-svh xs:max-sm:overflow-auto sm:max-md:flex-col sm:max-md:max-h-svh sm:max-md:overflow-auto">
         <div className="flex-1 space-y-12 xs:max-sm:space-y-8 sm:max-md:space-y-8">
-          <div className="flex items-center justify-between xs:max-sm:flex-col xs:max-sm:justify-start xs:max-sm:items-start xs:max-sm:space-y-3">
-            <h2 className="text-3xl font-semibold text-zinc-50 xs:max-sm:text-lg sm:max-md:text-xl">
+          <div className="flex items-center justify-between xs:max-sm:flex-col xs:max-sm:justify-start xs:max-sm:items-start xs:max-sm:space-y-3 md:max-lg:flex-col md:max-lg:justify-start md:max-lg:items-start md:max-lg:space-y-3">
+            <h2 className="text-3xl font-semibold text-zinc-50 xs:max-sm:text-lg sm:max-md:text-xl md:max-lg:text-2xl">
               Activités
             </h2>
             <CustomButton
