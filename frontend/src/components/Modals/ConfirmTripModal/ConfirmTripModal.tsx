@@ -4,7 +4,7 @@ import { User, Mail } from 'lucide-react'
 import InputWrapper from '../../ui/form/InputWrapper/InputWrapper'
 import CustomButton from '../../ui/Button/CustomButton/CustomButton'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router'
+import { useNavigate } from '@tanstack/react-router'
 import { formatDateRange } from '../../../utils/date'
 import { useTrip } from '../../../context/TripContext'
 import { useCreateTrip } from '../../../api/hooks/trips/mutations'
@@ -21,7 +21,7 @@ export default function ConfirmTripModal({
   const navigate = useNavigate()
   const { tripLocation, eventStartAndEndDates } = useTrip()
   const createTrip = useCreateTrip()
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const formattedDates = formatDateRange(eventStartAndEndDates, ' au ')
 
@@ -49,7 +49,7 @@ export default function ConfirmTripModal({
     }
 
     try {
-      setIsLoading(true) 
+      setIsLoading(true)
 
       const response = await createTrip.mutateAsync({
         destination: tripLocation,
@@ -74,13 +74,13 @@ export default function ConfirmTripModal({
 
       toast.success('Voyage créé avec succès !')
       closeModalConfirmation()
-      navigate('/confirm-trip', { state: { tripId } })
+      navigate({ to: '/confirm-trip',  search: { tripId }})
     } catch (error) {
       console.error(error)
       toast.error('Erreur lors de la création du voyage.')
     } finally {
-    setIsLoading(false)
-  }
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -120,11 +120,11 @@ export default function ConfirmTripModal({
             className="bg-transparent text-lg placeholder-zinc-400 outline-none w-90"
           />
         </div>
-        <CustomButton 
-        type="submit" 
-        fullWidth
-        isLoading={isLoading}
-        message="Création du voyage..."
+        <CustomButton
+          type="submit"
+          fullWidth
+          isLoading={isLoading}
+          message="Création du voyage..."
         >
           Confirmer la création du voyage
         </CustomButton>
