@@ -1,15 +1,16 @@
 import CustomButton from '../../components/ui/Button/CustomButton/CustomButton'
 import Logo from '../../components/ui/Logo/Logo'
-import { useNavigate, useLocation } from 'react-router'
+import { useNavigate, useSearch } from '@tanstack/react-router'
+import { Route as ConfirmTripRoute } from '../../routes/confirm-trip'
 
 export default function ConfirmTrip() {
   const navigate = useNavigate()
-  const location = useLocation()
-  const tripId = location.state?.tripId
+  const search = useSearch({ from: ConfirmTripRoute.id })
+  const tripId = search.tripId
 
   function handleViewDetailsPage() {
     if (tripId) {
-      navigate(`/trips/${tripId}`)
+      navigate({ to: '/trips/$tripId', params: { tripId } })
     }
   }
 

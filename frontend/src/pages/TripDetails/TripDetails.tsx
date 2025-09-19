@@ -12,7 +12,7 @@ import { useTrip } from '../../api/hooks/trips/queries'
 import { type Activities } from '../../@types/activities'
 import { type Participant } from '../../@types/guests'
 import { type Links } from '../../@types/links'
-import { useParams } from 'react-router'
+import { useParams } from '@tanstack/react-router'
 
 export default function TripDetails() {
   const [openLinkModal, setOpenLinkModal] = useState(false)
@@ -23,7 +23,9 @@ export default function TripDetails() {
   const [guests, setGuests] = useState<Participant[]>([])
   const [links, setLinks] = useState<Links[]>([])
 
-  const { tripId } = useParams<{ tripId: string }>()
+  // Import your route object, e.g. tripRoute, from your router definition file
+  // import { tripRoute } from '../../routes/yourRoutesFile'
+  const { tripId } = useParams({ from: '/trips/$tripId' })
   const { data: trip, refetch } = useTrip(tripId!)
 
   useEffect(() => {

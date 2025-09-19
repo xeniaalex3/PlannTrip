@@ -1,13 +1,15 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { RouterProvider } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import './styles/index.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { toastProps } from './utils/toastContainer'
-import router from './routes/router'
+import { routeTree } from './routeTree.gen'
 import { TripProvider } from './context/TripContext'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { createRouter, RouterProvider } from '@tanstack/react-router'
+
+const router = createRouter({ routeTree })
 
 const queryClient = new QueryClient()
 

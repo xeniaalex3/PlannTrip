@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@tanstack/react-router'
 import logo from '../../../assets/images/Vector.png'
 
 export default function Logo() {
