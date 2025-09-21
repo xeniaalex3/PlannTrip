@@ -1,4 +1,4 @@
-import { useState, type FormEvent, useEffect} from 'react'
+import { useState, type FormEvent, useEffect } from 'react'
 import { Calendar, Clock, Tag } from 'lucide-react'
 import ModalWrapper from '../../../../components/ui/ModalWrapper/ModalWrapper'
 import InputWrapper from '../../../../components/ui/form/InputWrapper/InputWrapper'
@@ -17,7 +17,7 @@ export default function CreateActivityModal({
   setEventStartDate
 }: CreateActivityModalProps) {
   const [title, setTitle] = useState('')
- const [occurs, setOccurs] = useState<Date | undefined>(undefined)
+  const [occurs, setOccurs] = useState<Date | undefined>(undefined)
   const [time, setTime] = useState('')
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -27,10 +27,10 @@ export default function CreateActivityModal({
   const queryClient = useQueryClient()
 
   useEffect(() => {
-  if (eventStartDate) {
-    setOccurs(eventStartDate)
-  }
-}, [eventStartDate])
+    if (eventStartDate) {
+      setOccurs(eventStartDate)
+    }
+  }, [eventStartDate])
 
   function openDatePicker() {
     setIsDatePickerOpen(true)
@@ -60,7 +60,7 @@ export default function CreateActivityModal({
       toast.success("L'activité a été ajoutée avec succès !")
 
       queryClient.invalidateQueries({ queryKey: ['activities', tripId] })
-     
+
       setTime('')
       setTitle('')
       setOccurs(undefined)
@@ -110,7 +110,7 @@ export default function CreateActivityModal({
               type="text"
               name="date"
               value={occurs ? formatSingleDate(occurs) : ''}
-            onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
+              onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
               readOnly
               placeholder="Date"
               className="bg-transparent text-lg placeholder-zinc-400 outline-none"
