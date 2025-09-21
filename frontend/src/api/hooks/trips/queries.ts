@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { api } from '../../client'
 import type { Trip } from '../../../@types/trips'
-import { useParams } from 'react-router-dom'
+import { useParams } from '@tanstack/react-router'
 
 export function useTrips() {
   return useQuery({
@@ -25,6 +25,6 @@ export function useTrip(tripId: string) {
 }
 
 export function useTripId(): string | undefined {
-  const params = useParams<{ id?: string; tripId?: string }>()
-  return params.id ?? params.tripId
+  const { tripId } = useParams({ from: '/trips/$tripId' })
+  return tripId
 }

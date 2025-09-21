@@ -16,7 +16,7 @@ export default function CreateLinkModal({
   const [isLoading, setIsLoading] = useState(false)
   const createLink = useCreateLink()
   const tripId = useTripId()
-
+console.log(tripId)
   async function handleSubmitCreateNewLink(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
