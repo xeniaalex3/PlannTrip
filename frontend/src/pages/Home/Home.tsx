@@ -9,7 +9,7 @@ export default function Home() {
   const [guestModalOpen, setGuestModalOpen] = useState(false)
   const [confirmModal, setConfirmModal] = useState(false)
   const [emailsToInvite, setEmailsToInvite] = useState<string[]>([])
-  
+
   const openGuestInput = () => setInputOpen(true)
   const closeGuestInput = () => setInputOpen(false)
   const openGuestModal = () => setGuestModalOpen(true)
@@ -19,7 +19,10 @@ export default function Home() {
 
   return (
     <>
-      <div className="space-y-4 sm:max-md:flex sm:max-md:items-center sm:max-md:justify-center">
+      <div className="space-y-6 sm:max-md:flex sm:max-md:items-center sm:max-md:justify-center">
+        <p className="text-zinc-300 text-lg max-sm:text-sm max-xs:text-base">
+          Invitez vos amis et planifiez votre prochain voyage !
+        </p>
         <SearchForm
           openGuestInput={openGuestInput}
           inputOpen={inputOpen}
@@ -43,7 +46,10 @@ export default function Home() {
       )}
 
       {confirmModal && (
-        <ConfirmTripModal closeModalConfirmation={closeModalConfirmation} emailsToInvite={emailsToInvite}/>
+        <ConfirmTripModal
+          closeModalConfirmation={closeModalConfirmation}
+          emailsToInvite={emailsToInvite}
+        />
       )}
     </>
   )
