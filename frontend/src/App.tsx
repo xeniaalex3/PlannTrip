@@ -4,12 +4,14 @@ import Home from '../src/pages/Home/Home'
 
 export default function App() {
   return (
-    <div className="h-screen flex items-center justify-center bg-[var(--bgImage)] bg-no-repeat bg-center">
-      <div className="max-w-3xl mx-auto px-6 text-center space-y-10 ">
-        <Header />
+    <div className="h-screen flex flex-col justify-between bg-[var(--bgImage)] bg-no-repeat bg-center py-8 text-center">
+      <Header />
+
+      <div className="flex-1 flex items-center justify-center px-6">
         <Home />
-        <Footer />
       </div>
+
+      <Footer />
     </div>
   )
 }
