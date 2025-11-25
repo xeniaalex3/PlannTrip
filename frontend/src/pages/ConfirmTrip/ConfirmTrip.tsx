@@ -1,5 +1,4 @@
 import CustomButton from '../../components/ui/Button/CustomButton/CustomButton'
-import Logo from '../../components/ui/Logo/Logo'
 import { useNavigate, useSearch } from '@tanstack/react-router'
 import { Route as ConfirmTripRoute } from '../../routes/confirm-trip'
 
@@ -15,9 +14,8 @@ export default function ConfirmTrip() {
   }
 
   return (
-    <div className="h-dvh flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center">
       <div className="max-w-3xl mx-auto px-6 text-center space-y-10 ">
-        <Logo />
         <div className="space-y-4 shadow-[var(--shadow)] bg-zinc-900 px-6 py-8 rounded-lg">
           <h3 className="text-zinc-100 font-medium text-xl xs:max-sm:text-lg">
             Votre voyage a été créé avec succès !{' '}

@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <>
       <div className="space-y-6 sm:max-md:flex sm:max-md:items-center sm:max-md:justify-center">
-        <p className="text-zinc-300 text-lg max-sm:text-sm max-xs:text-base">
+        <p className="text-zinc-300 text-lg max-sm:text-sm max-xs:text-base text-center">
           Invitez vos amis et planifiez votre prochain voyage !
         </p>
         <SearchForm
