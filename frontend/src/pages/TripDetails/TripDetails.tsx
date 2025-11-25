@@ -68,7 +68,7 @@ export default function TripDetails() {
   }
 
   return (
-    <div className="max-w-6xl px-6 py-10 mx-auto space-y-8">
+    <div className="self-start max-w-6xl lg:w-7xl px-4 py-10 space-y-8">
       {trip && <DestinationDateHeader trip={trip} />}
       <main className="flex gap-16 px-6 xs:max-sm:flex-col xs:max-sm:max-h-svh xs:max-sm:overflow-auto sm:max-md:flex-col sm:max-md:max-h-svh sm:max-md:overflow-auto">
         <div className="flex-1 space-y-12 xs:max-sm:space-y-8 sm:max-md:space-y-8">
@@ -137,7 +137,10 @@ export default function TripDetails() {
         <CreateLinkModal handleCloseLinkModal={handleCloseLinkModal} />
       )}
       {openGuestModal && trip && (
-        <CreateGuestModal handleCloseGuestModal={handleCloseGuestModal} trip={trip} />
+        <CreateGuestModal
+          handleCloseGuestModal={handleCloseGuestModal}
+          trip={trip}
+        />
       )}
 
       {openActivityModal && (
