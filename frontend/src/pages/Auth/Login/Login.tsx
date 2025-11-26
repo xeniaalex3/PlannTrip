@@ -29,7 +29,7 @@ export default function Login() {
         Se connecter
       </CustomButton>
       <LinkToSwitch
-        to="/inscription"
+        to="/register"
         title="Pas encore inscrit ?"
         subtitle="Inscrivez-vous"
       />
