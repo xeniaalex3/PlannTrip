@@ -15,7 +15,7 @@ export default function CreateGuestModal({
 }: CreateGuestModalProps) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
   const createGuest = useCreateParticipant()
   const tripId = useTripId()
 
@@ -24,10 +24,19 @@ export default function CreateGuestModal({
     ' au '
   )
 
+  function isValidEmail(value: string) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+  }
+
   async function handleSubmitCreateNewGuest(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     if (!name || !email) {
       toast.error('Veuillez remplir tous les champs.')
+      return
+    }
+
+    if (!isValidEmail(email)) {
+      toast.error('Veuillez saisir une adresse e-mail valide.')
       return
     }
 
@@ -56,9 +65,9 @@ export default function CreateGuestModal({
       console.error(error)
       toast.error('Erreur lors de la création du participant.')
     } finally {
-    setIsLoading(false)
-  }}
-
+      setIsLoading(false)
+    }
+  }
 
   return (
     <ModalWrapper onClick={handleCloseGuestModal}>

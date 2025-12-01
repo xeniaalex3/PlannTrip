@@ -1,23 +1,19 @@
+import { forwardRef } from 'react'
 import type { InputWrapperProps } from '../../../../@types/form'
 
-export default function InputWrapper({
-  placeholder,
-  type,
-  name,
-  className,
-  disabled,
-  value,
-  onChange
-}: InputWrapperProps) {
-  return (
-    <input
-      type={type}
-      placeholder={placeholder}
-      className={className}
-      disabled={disabled}
-      name={name}
-      value={value}
-      onChange={onChange}
-    />
-  )
-}
+const InputWrapper = forwardRef<HTMLInputElement, InputWrapperProps>(
+  ({ placeholder, type, className, disabled, ...rest }, ref) => {
+    return (
+      <input
+        ref={ref}
+        type={type}
+        placeholder={placeholder}
+        className={className}
+        disabled={disabled}
+        {...rest}
+      />
+    )
+  }
+)
+
+export default InputWrapper

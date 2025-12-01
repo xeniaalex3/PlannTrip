@@ -4,12 +4,14 @@ interface AuthLayoutProps {
   title: string
   subtitle: string
   children: ReactNode
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
 }
 
 export default function AuthLayout({
   title,
   subtitle,
-  children
+  children,
+  onSubmit
 }: AuthLayoutProps) {
   return (
     <div className="flex flex-col justify-center items-center gap-12 w-full max-w-md">
@@ -18,7 +20,7 @@ export default function AuthLayout({
         {subtitle && <h3 className="text-zinc-300">{subtitle}</h3>}
       </div>
 
-      <form action="" className="flex flex-col gap-5 w-full">
+      <form className="flex flex-col gap-5 w-full" onSubmit={onSubmit}>
         {children}
       </form>
     </div>

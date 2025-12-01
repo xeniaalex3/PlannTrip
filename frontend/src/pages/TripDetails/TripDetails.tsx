@@ -13,6 +13,7 @@ import { type Activities } from '../../@types/activities'
 import { type Participant } from '../../@types/guests'
 import { type Links } from '../../@types/links'
 import { useParams } from '@tanstack/react-router'
+import Loading from '../../components/ui/Loading/Loading'
 
 export default function TripDetails() {
   const [openLinkModal, setOpenLinkModal] = useState(false)
@@ -23,10 +24,8 @@ export default function TripDetails() {
   const [guests, setGuests] = useState<Participant[]>([])
   const [links, setLinks] = useState<Links[]>([])
 
-  // Import your route object, e.g. tripRoute, from your router definition file
-  // import { tripRoute } from '../../routes/yourRoutesFile'
   const { tripId } = useParams({ from: '/trips/$tripId' })
-  const { data: trip, refetch } = useTrip(tripId!)
+  const { data: trip, isLoading, isError } = useTrip(tripId!)
 
   useEffect(() => {
     if (trip) {
@@ -34,8 +33,7 @@ export default function TripDetails() {
       setGuests(trip.participants || [])
       setLinks(trip.links || [])
     }
-    refetch()
-  }, [refetch, trip])
+  }, [trip])
 
   // link
   const handleOpenLinkModal = () => setOpenLinkModal(true)
@@ -64,6 +62,25 @@ export default function TripDetails() {
       prev.map(guest =>
         guest.id === id ? { ...guest, done: !guest.done } : guest
       )
+    )
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-full py-10">
+        <Loading />
+        <p className="text-zinc-100 text-lg">Chargement du voyage...</p>
+      </div>
+    )
+  }
+
+  if (isError) {
+    return (
+      <div className="flex items-center justify-center h-full py-10">
+        <p className="text-red-400 text-lg">
+          Une erreur est survenue lors du chargement du voyage.
+        </p>
+      </div>
     )
   }
 
