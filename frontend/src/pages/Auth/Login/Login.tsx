@@ -14,7 +14,7 @@ type FormField = z.infer<typeof loginSchema>
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false)
 
-  const { register, handleSubmit } = useForm<FormField>({
+  const { register, handleSubmit, reset } = useForm<FormField>({
     defaultValues: {
       email: '',
       password: ''
@@ -37,6 +37,7 @@ export default function Login() {
       setIsLoading(false)
       console.log('SUBMIT FINISHED')
     }
+    reset()
   }
 
   return (
