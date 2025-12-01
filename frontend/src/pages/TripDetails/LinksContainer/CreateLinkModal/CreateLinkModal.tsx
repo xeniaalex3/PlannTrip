@@ -16,12 +16,31 @@ export default function CreateLinkModal({
   const [isLoading, setIsLoading] = useState(false)
   const createLink = useCreateLink()
   const tripId = useTripId()
-console.log(tripId)
+
+  function isValidUrl(value: string) {
+    try {
+      const url = new URL(value)
+      return url.protocol === 'http:' || url.protocol === 'https:'
+    } catch {
+      return false
+    }
+  }
+
   async function handleSubmitCreateNewLink(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
     if (!title || !link) {
       toast.error('Veuillez remplir tous les champs.')
+      return
+    }
+
+    if (!isValidUrl(link)) {
+      toast.error('Veuillez saisir une URL valide (http ou https).')
+      return
+    }
+
+    if (!tripId) {
+      toast.error('ID du voyage manquant.')
       return
     }
 
