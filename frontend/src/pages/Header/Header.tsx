@@ -5,6 +5,7 @@ import { LogOut } from 'lucide-react'
 
 export default function Header() {
   const { isAuthenticated, user, logout } = useAuth()
+  console.log(user);
   const navigate = useNavigate()
 
   const handleLogout = () => {

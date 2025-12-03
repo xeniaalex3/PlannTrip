@@ -32,7 +32,7 @@ export default function Register() {
       onSuccess: () => {
         toast.success('Inscription réussie 🎉')
         reset()
-        // Redirecion para o login após registro bem-sucedido
+        // Redirect to login after successful registration
         setTimeout(() => {
           navigate({ to: '/login' })
         }, 500)
@@ -40,9 +40,9 @@ export default function Register() {
       onError: (error) => {
         console.error(error)
         if (error instanceof Error) {
-          toast.error(error.message || "Une erreur est survenue lors d'inscription")
+          toast.error(error.message || "Une erreur est survenue lors d'inscription.")
         } else {
-          toast.error("Une erreur est survenue lors d'inscription")
+          toast.error("Une erreur est survenue lors d'inscription.")
         }
       }
     })

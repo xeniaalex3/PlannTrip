@@ -1,70 +1,46 @@
-import { api } from './client';
-
-export interface LoginRequest {
-  email: string;
-  password: string;
-}
-
-export interface RegisterRequest {
-  firstname: string;
-  lastname: string;
-  email: string;
-  password: string;
-}
-
-export interface AuthResponse {
-  access_token: string;
-  refresh_token: string;
-  user: {
-    id: number;
-    email: string;
-    firstname: string;
-    lastname: string;
-  };
-}
-
-export interface UserResponse {
-  id: number;
-  email: string;
-  firstname: string;
-  lastname: string;
-}
+import { api } from './client'
+import type {
+  LoginRequest,
+  AuthResponse,
+  RegisterRequest
+} from '../@types/auth'
+import type { UserResponse } from '../@types/user'
 
 export const authApi = {
   login: async (data: LoginRequest): Promise<AuthResponse> => {
-    const response = await api.post('/login', data);
-    return response.data;
+    const response = await api.post('/login', data)
+    return response.data
   },
 
   register: async (data: RegisterRequest): Promise<UserResponse> => {
-    const response = await api.post('/register', data);
-    return response.data;
+    const response = await api.post('/register', data)
+    return response.data
   },
 
-  // Armazenar tokens no localStorage
+   // Store tokens in localStorage
   setTokens: (accessToken: string, refreshToken: string) => {
-    localStorage.setItem('access_token', accessToken);
-    localStorage.setItem('refresh_token', refreshToken);
+    localStorage.setItem('access_token', accessToken)
+    localStorage.setItem('refresh_token', refreshToken)
   },
 
-  // Recuperar access token
+ // Retrieve access token
   getAccessToken: (): string | null => {
-    return localStorage.getItem('access_token');
+    return localStorage.getItem('access_token')
   },
 
-  // Recuperar refresh token
+ // Retrieve refresh token
   getRefreshToken: (): string | null => {
-    return localStorage.getItem('refresh_token');
+    return localStorage.getItem('refresh_token')
   },
 
-  // Limpar tokens
+  // Clear tokens
   clearTokens: () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('refresh_token')
   },
 
   // Logout
   logout: () => {
-    authApi.clearTokens();
-  },
-};
+    authApi.clearTokens()
+  }
+}

@@ -30,17 +30,14 @@ export default function Login() {
       onSuccess: async () => {
         toast.success('Connexion réussie 🎉')
         reset()
-        // Aguarde um pouco antes de navegar para dar tempo ao estado ser atualizado
-        setTimeout(() => {
-          navigate({ to: '/' })
-        }, 500)
+         navigate({ to: '/' })
       },
       onError: (error) => {
         console.error(error)
         if (error instanceof Error) {
-          toast.error(error.message || 'Uma erreur é survenue lors de conexão')
+          toast.error(error.message || 'Une erreur est survenue lors de la connexion.')
         } else {
-          toast.error('Une erreur est survenue lors de conexão')
+          toast.error('Une erreur est survenue lors de la connexion.')
         }
       }
     })
