@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import { toastProps } from './utils/toastContainer'
 import { routeTree } from './routeTree.gen'
 import { TripProvider } from './context/TripContext'
+import { AuthProvider } from './context/AuthContext'
+import { AuthErrorBoundary } from './components/ErrorBoundary/AuthErrorBoundary'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createRouter, RouterProvider } from '@tanstack/react-router'
 
@@ -16,10 +18,14 @@ const queryClient = new QueryClient()
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <TripProvider>
-        <ToastContainer {...toastProps} />
-        <RouterProvider router={router} />
-      </TripProvider>
+      <AuthErrorBoundary>
+        <AuthProvider>
+          <TripProvider>
+            <ToastContainer {...toastProps} />
+            <RouterProvider router={router} />
+          </TripProvider>
+        </AuthProvider>
+      </AuthErrorBoundary>
     </QueryClientProvider>
   </StrictMode>
 )
