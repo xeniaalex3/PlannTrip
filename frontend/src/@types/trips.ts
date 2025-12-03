@@ -8,6 +8,12 @@ export interface Trip {
   starts_at: string;
   ends_at: string;
   is_confirmed: boolean;
+  user: {
+    id: number;
+    firstname: string;
+    lastname: string;
+    email: string;
+  };
   participants: Participant[];
   activities: Activities[];
   links: Links[];
@@ -24,5 +30,6 @@ export interface CreateTripInput {
   starts_at: string
   ends_at: string
   is_confirmed: boolean
+  user_id: number;
   participants: CreateParticipant[]
 }
