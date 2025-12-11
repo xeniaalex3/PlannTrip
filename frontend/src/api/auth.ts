@@ -17,18 +17,24 @@ export const authApi = {
     return response.data
   },
 
-   // Store tokens in localStorage
+  // Get current user from token
+  getCurrentUser: async (): Promise<UserResponse> => {
+    const response = await api.get('/user/me')
+    return response.data
+  },
+
+  // Store tokens in localStorage
   setTokens: (accessToken: string, refreshToken: string) => {
     localStorage.setItem('access_token', accessToken)
     localStorage.setItem('refresh_token', refreshToken)
   },
 
- // Retrieve access token
+  // Retrieve access token
   getAccessToken: (): string | null => {
     return localStorage.getItem('access_token')
   },
 
- // Retrieve refresh token
+  // Retrieve refresh token
   getRefreshToken: (): string | null => {
     return localStorage.getItem('refresh_token')
   },
