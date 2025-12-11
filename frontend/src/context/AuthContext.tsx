@@ -1,85 +1,79 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { jwtDecode } from 'jwt-decode';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { authApi } from '../api/auth';
 import type { UserResponse } from '../@types/user';
 
 interface AuthContextType {
   user: UserResponse | null;
-  isLoading: boolean;
   isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   setUser: (user: UserResponse | null) => void;
-}
-
-interface JwtPayload {
-  sub: string;
+  isLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUserState] = useState<UserResponse | null>(null);
+  const [user, setUser] = useState<UserResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const token = authApi.getAccessToken();
-  let userId: string | null = null;
-
-  if (token) {
-    const decoded = jwtDecode<JwtPayload>(token);
-    userId = decoded.sub;
-  }
-
-  const { data, isLoading } = useQuery<UserResponse>({
-    queryKey: ['user', userId],
-    queryFn: async () => {
-      if (!userId) throw new Error('No user ID found in token');
-
-      const response = await fetch(`/user/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) throw new Error('Failed to fetch user');
-      return response.json();
-    },
-    enabled: !!userId,
-  });
-
+  // Rehydrate user when app loads and token exists
   useEffect(() => {
-    if (data) setUserState(data);
-  }, [data]);
+    const loadUser = async () => {
+      const currentToken = authApi.getAccessToken();
+      
+      if (!currentToken) {
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        // Try to fetch current user from backend
+        const userData = await authApi.getCurrentUser();
+        setUser(userData);
+      } catch (error) {
+        // If it fails, token might be invalid
+        // Clear tokens and let interceptor handle redirect
+        console.error('Failed to load user:', error);
+        authApi.clearTokens();
+        setUser(null);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadUser();
+  }, []);
 
   const login = async (email: string, password: string) => {
-    try {
-      const response = await authApi.login({ email, password });
-      setUserState(response.user);
-    } catch (error) {
-      console.error('Login failed:', error);
-      throw error;
-    }
+    const response = await authApi.login({ email, password });
+    authApi.setTokens(response.access_token, response.refresh_token);
+    setUser(response.user);
   };
 
   const logout = () => {
     authApi.logout();
-    setUserState(null);
+    setUser(null);
   };
 
-  const setUser = (user: UserResponse | null) => {
-    setUserState(user);
-  };
+  // Calculate isAuthenticated based on current token (always reactive)
+  const token = authApi.getAccessToken();
+  const isAuthenticated = !!token;
 
-  const value: AuthContextType = {
-    user,
-    isLoading,
-    isAuthenticated: !!user,
-    login,
-    logout,
-    setUser,
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        isAuthenticated,
+        login,
+        logout,
+        setUser,
+        isLoading,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => {
@@ -87,3 +81,5 @@ export const useAuth = () => {
   if (!context) throw new Error('useAuth must be used within AuthProvider');
   return context;
 };
+
+

@@ -1,6 +1,6 @@
 import CustomButton from '../../components/ui/Button/CustomButton/CustomButton'
 import { useNavigate, useSearch } from '@tanstack/react-router'
-import { Route as ConfirmTripRoute } from '../../routes/_protected/confirm-trip'
+import { Route as ConfirmTripRoute } from '../../routes/confirm-trip'
 
 export default function ConfirmTrip() {
   const navigate = useNavigate()

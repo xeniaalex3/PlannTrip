@@ -11,10 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as ProtectedIndexRouteImport } from './routes/_protected/index'
-import { Route as ProtectedConfirmTripRouteImport } from './routes/_protected/confirm-trip'
-import { Route as ProtectedProtectedRouteRouteImport } from './routes/_protected/_protectedRoute'
-import { Route as ProtectedTripsTripIdRouteImport } from './routes/_protected/trips/$tripId'
+import { Route as ConfirmTripRouteImport } from './routes/confirm-trip'
+import { Route as ProtectedRouteImport } from './routes/_protected'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as TripsTripIdRouteImport } from './routes/trips/$tripId'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -26,71 +26,71 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProtectedIndexRoute = ProtectedIndexRouteImport.update({
-  id: '/_protected/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProtectedConfirmTripRoute = ProtectedConfirmTripRouteImport.update({
-  id: '/_protected/confirm-trip',
+const ConfirmTripRoute = ConfirmTripRouteImport.update({
+  id: '/confirm-trip',
   path: '/confirm-trip',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProtectedProtectedRouteRoute = ProtectedProtectedRouteRouteImport.update({
-  id: '/_protected/_protectedRoute',
+const ProtectedRoute = ProtectedRouteImport.update({
+  id: '/_protected',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProtectedTripsTripIdRoute = ProtectedTripsTripIdRouteImport.update({
-  id: '/_protected/trips/$tripId',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TripsTripIdRoute = TripsTripIdRouteImport.update({
+  id: '/trips/$tripId',
   path: '/trips/$tripId',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '/confirm-trip': typeof ConfirmTripRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
-  '/confirm-trip': typeof ProtectedConfirmTripRoute
-  '/': typeof ProtectedIndexRoute
-  '/trips/$tripId': typeof ProtectedTripsTripIdRoute
+  '/trips/$tripId': typeof TripsTripIdRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '/confirm-trip': typeof ConfirmTripRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
-  '/confirm-trip': typeof ProtectedConfirmTripRoute
-  '/': typeof ProtectedIndexRoute
-  '/trips/$tripId': typeof ProtectedTripsTripIdRoute
+  '/trips/$tripId': typeof TripsTripIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/_protected': typeof ProtectedRoute
+  '/confirm-trip': typeof ConfirmTripRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
-  '/_protected/_protectedRoute': typeof ProtectedProtectedRouteRoute
-  '/_protected/confirm-trip': typeof ProtectedConfirmTripRoute
-  '/_protected/': typeof ProtectedIndexRoute
-  '/_protected/trips/$tripId': typeof ProtectedTripsTripIdRoute
+  '/trips/$tripId': typeof TripsTripIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/login' | '/register' | '/confirm-trip' | '/' | '/trips/$tripId'
+  fullPaths: '/' | '/confirm-trip' | '/login' | '/register' | '/trips/$tripId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/register' | '/confirm-trip' | '/' | '/trips/$tripId'
+  to: '/' | '/confirm-trip' | '/login' | '/register' | '/trips/$tripId'
   id:
     | '__root__'
+    | '/'
+    | '/_protected'
+    | '/confirm-trip'
     | '/login'
     | '/register'
-    | '/_protected/_protectedRoute'
-    | '/_protected/confirm-trip'
-    | '/_protected/'
-    | '/_protected/trips/$tripId'
+    | '/trips/$tripId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  ProtectedRoute: typeof ProtectedRoute
+  ConfirmTripRoute: typeof ConfirmTripRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
-  ProtectedProtectedRouteRoute: typeof ProtectedProtectedRouteRoute
-  ProtectedConfirmTripRoute: typeof ProtectedConfirmTripRoute
-  ProtectedIndexRoute: typeof ProtectedIndexRoute
-  ProtectedTripsTripIdRoute: typeof ProtectedTripsTripIdRoute
+  TripsTripIdRoute: typeof TripsTripIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -109,44 +109,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_protected/': {
-      id: '/_protected/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof ProtectedIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_protected/confirm-trip': {
-      id: '/_protected/confirm-trip'
+    '/confirm-trip': {
+      id: '/confirm-trip'
       path: '/confirm-trip'
       fullPath: '/confirm-trip'
-      preLoaderRoute: typeof ProtectedConfirmTripRouteImport
+      preLoaderRoute: typeof ConfirmTripRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_protected/_protectedRoute': {
-      id: '/_protected/_protectedRoute'
+    '/_protected': {
+      id: '/_protected'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof ProtectedProtectedRouteRouteImport
+      preLoaderRoute: typeof ProtectedRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_protected/trips/$tripId': {
-      id: '/_protected/trips/$tripId'
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trips/$tripId': {
+      id: '/trips/$tripId'
       path: '/trips/$tripId'
       fullPath: '/trips/$tripId'
-      preLoaderRoute: typeof ProtectedTripsTripIdRouteImport
+      preLoaderRoute: typeof TripsTripIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  ProtectedRoute: ProtectedRoute,
+  ConfirmTripRoute: ConfirmTripRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
-  ProtectedProtectedRouteRoute: ProtectedProtectedRouteRoute,
-  ProtectedConfirmTripRoute: ProtectedConfirmTripRoute,
-  ProtectedIndexRoute: ProtectedIndexRoute,
-  ProtectedTripsTripIdRoute: ProtectedTripsTripIdRoute,
+  TripsTripIdRoute: TripsTripIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

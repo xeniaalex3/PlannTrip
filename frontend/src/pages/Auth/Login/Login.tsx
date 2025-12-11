@@ -8,13 +8,15 @@ import { loginSchema } from '../../../lib/zodSchema'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'react-toastify'
-import { useLoginMutation } from '../../../api/hooks/auth/mutations'
+import { useAuth } from '../../../context/AuthContext'
+import { useState } from 'react'
 
 type FormField = z.infer<typeof loginSchema>
 
 export default function Login() {
   const navigate = useNavigate()
-  const { mutate: login, isPending: isLoading } = useLoginMutation()
+  const { login } = useAuth()
+  const [isLoading, setIsLoading] = useState(false)
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormField>({
     defaultValues: {
@@ -26,21 +28,23 @@ export default function Login() {
   })
 
   const handleSubmitFormLogin: SubmitHandler<FormField> = async data => {
-    login(data, {
-      onSuccess: async () => {
-        toast.success('Connexion réussie 🎉')
-        reset()
-         navigate({ to: '/' })
-      },
-      onError: (error) => {
-        console.error(error)
-        if (error instanceof Error) {
-          toast.error(error.message || 'Une erreur est survenue lors de la connexion.')
-        } else {
-          toast.error('Une erreur est survenue lors de la connexion.')
-        }
+    setIsLoading(true)
+    try {
+      await login(data.email, data.password)
+      toast.success('Connexion réussie 🎉')
+      reset()
+      // Wait for toast to be visible
+      setTimeout(() => navigate({ to: '/' }), 1000)
+    } catch (error) {
+      console.error(error)
+      if (error instanceof Error) {
+        toast.error(error.message || 'Une erreur est survenue lors de la connexion.')
+      } else {
+        toast.error('Une erreur est survenue lors de la connexion.')
       }
-    })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
