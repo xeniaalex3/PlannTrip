@@ -8,6 +8,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { formatDateRange } from '../../../utils/date'
 import { useTrip } from '../../../context/TripContext'
 import { useCreateTrip } from '../../../api/hooks/trips/mutations'
+import { useAuth } from '../../../context/AuthContext'
 
 interface ConfirmTripModalProps {
   closeModalConfirmation: () => void
@@ -20,6 +21,7 @@ export default function ConfirmTripModal({
 }: ConfirmTripModalProps) {
   const navigate = useNavigate()
   const { tripLocation, eventStartAndEndDates } = useTrip()
+  const { user } = useAuth()
   const createTrip = useCreateTrip()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -48,6 +50,11 @@ export default function ConfirmTripModal({
       return
     }
 
+    if (!user?.id) {
+      toast.error('Vous devez être connecté pour créer un voyage.')
+      return
+    }
+
     try {
       setIsLoading(true)
 
@@ -56,6 +63,7 @@ export default function ConfirmTripModal({
         starts_at: eventStartAndEndDates.from.toISOString(),
         ends_at: eventStartAndEndDates.to?.toISOString(),
         is_confirmed: true,
+        user_id: user.id,
         participants: [
           {
             name,
