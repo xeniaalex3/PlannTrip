@@ -1,23 +1,20 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { authApi } from '../api/auth'
-import type { User, UserResponse } from '../@types/user'
+import type { UserResponse } from '../@types/user'
 
 interface AuthContextType {
-  user: User | null
+  user: UserResponse | null
   isAuthenticated: boolean
   login: (email: string, password: string) => Promise<void>
   logout: () => void
-  setUser: (user: User | null) => void
+  setUser: (user: UserResponse | null) => void
   isLoading: boolean
-  profile: UserResponse | null
-  setProfile: (profile: UserResponse | null) => void
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null)
-  const [profile, setProfile] = useState<UserResponse | null>(null)
+  const [user, setUser] = useState<UserResponse | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -35,12 +32,29 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           id: userData.id,
           email: userData.email,
           firstname: userData.firstname,
-          lastname: userData.lastname
+          lastname: userData.lastname,
+          createdAt: userData.createdAt,
+          updatedAt: userData.updatedAt
         })
-        setProfile(userData)
       } catch {
-        authApi.clearTokens()
-        setUser(null)
+        // Try to refresh token if getCurrentUser fails
+        try {
+          await authApi.refresh()
+          // Retry getCurrentUser with new token
+          const userData = await authApi.getCurrentUser()
+          setUser({
+            id: userData.id,
+            email: userData.email,
+            firstname: userData.firstname,
+            lastname: userData.lastname,
+            createdAt: userData.createdAt,
+            updatedAt: userData.updatedAt
+          })
+        } catch {
+          // If refresh also fails, clear tokens
+          authApi.clearTokens()
+          setUser(null)
+        }
       } finally {
         setIsLoading(false)
       }
@@ -52,7 +66,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const login = async (email: string, password: string) => {
     const response = await authApi.login({ email, password })
     authApi.setTokens(response.access_token, response.refresh_token)
-    setUser(response.user)
+    setUser({
+      id: response.user.id,
+      email: response.user.email,
+      firstname: response.user.firstname,
+      lastname: response.user.lastname,
+      createdAt: response.user.createdAt,
+      updatedAt: response.user.updatedAt
+    })
   }
 
   const logout = () => {
@@ -66,10 +87,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     <AuthContext.Provider
       value={{
         user,
-        profile,
         isAuthenticated,
         login,
-        setProfile,
         logout,
         setUser,
         isLoading
