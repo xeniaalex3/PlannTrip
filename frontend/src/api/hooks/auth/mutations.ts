@@ -1,13 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 import { authApi } from '../../auth';
 import type { LoginRequest, RegisterRequest } from '../../../@types/auth';
+import { useAuth } from '../../../context/AuthContext';
 
 export const useLoginMutation = () => {
+  const { login } = useAuth();
+
   return useMutation({
     mutationFn: async (data: LoginRequest) => {
-      const response = await authApi.login(data);
-      authApi.setTokens(response.access_token, response.refresh_token);
-      return response;
+      await login(data.email, data.password);
     },
   });
 };
@@ -21,9 +22,11 @@ export const useRegisterMutation = () => {
 };
 
 export const useLogoutMutation = () => {
+  const { logout } = useAuth();
+
   return useMutation({
     mutationFn: async () => {
-      authApi.logout();
+      logout();
     },
   });
 };

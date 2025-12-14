@@ -1,32 +1,45 @@
-import { useNavigate } from '@tanstack/react-router'
+import { useLocation, useNavigate } from '@tanstack/react-router'
 import Logo from '../../components/ui/Logo/Logo'
 import { useAuth } from '../../context/AuthContext'
 import { LogOut } from 'lucide-react'
 import CustomButton from '../../components/ui/Button/CustomButton/CustomButton'
+import MenuLinks from './MenuLinks/MenuLinks'
+import { menuItems } from './MenuItems/MenuItems'
+import { isFocusPage } from '../../utils/utils'
 
 export default function Header() {
-  const { isAuthenticated, user, logout, isLoading } = useAuth()
+  const { isAuthenticated, logout, isLoading } = useAuth()
   const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   const handleLogout = () => {
     logout()
     navigate({ to: '/login' })
   }
 
-  if (isLoading) return null;
+  if (isLoading) return null
 
   return (
-    <div className="w-full">
+    <header className="w-full">
       <div className="flex items-center justify-around">
         <Logo />
         {isAuthenticated && (
-          <div className="flex items-center gap-4">
-            <span className="text-gray-300 text-sm">
-              Bienvenue, <span className="font-semibold">{user?.firstname} ! </span>
-            </span>
+          <div className="flex justify-center items-center gap-4">
+            <nav className="flex flex-row justify-end items-center gap-4 md:flex xs:hidden">
+              {menuItems.map(item => (
+                <MenuLinks
+                  key={item.name}
+                  path={item.path}
+                  name={item.name}
+                  pathname={pathname}
+                  id={item.id}
+                  focus={isFocusPage(pathname, item.id)}
+                />
+              ))}
+            </nav>
             <CustomButton
-              type='button'
-              color='gray'
+              type="button"
+              color="gray"
               onClick={handleLogout}
               className="flex items-center gap-2 px-3 py-0 rounded-md transition-colors"
             >
@@ -36,7 +49,6 @@ export default function Header() {
           </div>
         )}
       </div>
-    </div>
+    </header>
   )
 }
-
