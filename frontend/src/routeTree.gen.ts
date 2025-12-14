@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as ProfilRouteImport } from './routes/profil'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ConfirmTripRouteImport } from './routes/confirm-trip'
 import { Route as ProtectedRouteImport } from './routes/_protected'
@@ -19,6 +20,11 @@ import { Route as TripsTripIdRouteImport } from './routes/trips/$tripId'
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfilRoute = ProfilRouteImport.update({
+  id: '/profil',
+  path: '/profil',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -50,6 +56,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/confirm-trip': typeof ConfirmTripRoute
   '/login': typeof LoginRoute
+  '/profil': typeof ProfilRoute
   '/register': typeof RegisterRoute
   '/trips/$tripId': typeof TripsTripIdRoute
 }
@@ -57,6 +64,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/confirm-trip': typeof ConfirmTripRoute
   '/login': typeof LoginRoute
+  '/profil': typeof ProfilRoute
   '/register': typeof RegisterRoute
   '/trips/$tripId': typeof TripsTripIdRoute
 }
@@ -66,20 +74,34 @@ export interface FileRoutesById {
   '/_protected': typeof ProtectedRoute
   '/confirm-trip': typeof ConfirmTripRoute
   '/login': typeof LoginRoute
+  '/profil': typeof ProfilRoute
   '/register': typeof RegisterRoute
   '/trips/$tripId': typeof TripsTripIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/confirm-trip' | '/login' | '/register' | '/trips/$tripId'
+  fullPaths:
+    | '/'
+    | '/confirm-trip'
+    | '/login'
+    | '/profil'
+    | '/register'
+    | '/trips/$tripId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/confirm-trip' | '/login' | '/register' | '/trips/$tripId'
+  to:
+    | '/'
+    | '/confirm-trip'
+    | '/login'
+    | '/profil'
+    | '/register'
+    | '/trips/$tripId'
   id:
     | '__root__'
     | '/'
     | '/_protected'
     | '/confirm-trip'
     | '/login'
+    | '/profil'
     | '/register'
     | '/trips/$tripId'
   fileRoutesById: FileRoutesById
@@ -89,6 +111,7 @@ export interface RootRouteChildren {
   ProtectedRoute: typeof ProtectedRoute
   ConfirmTripRoute: typeof ConfirmTripRoute
   LoginRoute: typeof LoginRoute
+  ProfilRoute: typeof ProfilRoute
   RegisterRoute: typeof RegisterRoute
   TripsTripIdRoute: typeof TripsTripIdRoute
 }
@@ -100,6 +123,13 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profil': {
+      id: '/profil'
+      path: '/profil'
+      fullPath: '/profil'
+      preLoaderRoute: typeof ProfilRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -145,6 +175,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProtectedRoute: ProtectedRoute,
   ConfirmTripRoute: ConfirmTripRoute,
   LoginRoute: LoginRoute,
+  ProfilRoute: ProfilRoute,
   RegisterRoute: RegisterRoute,
   TripsTripIdRoute: TripsTripIdRoute,
 }

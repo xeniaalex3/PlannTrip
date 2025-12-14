@@ -34,7 +34,7 @@ export default function Login() {
       toast.success('Connexion réussie 🎉')
       reset()
       // Wait for toast to be visible
-      setTimeout(() => navigate({ to: '/' }), 1000)
+      setTimeout(() => navigate({ to: '/' }), 100)
     } catch (error) {
       console.error(error)
       if (error instanceof Error) {
