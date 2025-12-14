@@ -17,25 +17,17 @@ PlannTrip is a web application for planning trips, managing guests, activities, 
 #### 🔐 Authentication & User Account
 
 - 🔑 User authentication (login & register)
-
 - 👤 Profile page
-
 - 📄 View basic profile information (email, account creation date, etc.)
-
 - ✏️ Update profile information
-
 - ⚙️ Account management
-
 - 🗑️ Delete user account
-
 - 🔒 Protected routes for authenticated users
 
 #### 📱 UI & UX
 
 - 🧠 Responsive design (mobile & desktop)
-
 - 🎨 Clean and modern interface with Tailwind CSS
-
 - ⚡ Fast development and build with Vite
 
 <br>
