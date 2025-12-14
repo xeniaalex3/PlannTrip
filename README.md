@@ -41,7 +41,6 @@ PlannTrip is a web application for planning trips, managing guests, activities, 
 - TanStack React Router
 - TanStack React Query
 - Axios
-- jwt-decode
 - React Hook Form
 - Zod
 - Netlify (deployment)
