@@ -12,7 +12,7 @@ export default function ProfilHeader() {
           alt="Image user"
           className="w-15 h-15 rounded-full"
         />
-        <p className="text-zinc-300 text-xl">
+        <p className="text-zinc-100 text-xl">
           Bienvenue,{' '}
           <span className="font-semibold">
             {user?.firstname}{' '}

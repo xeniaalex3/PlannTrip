@@ -22,3 +22,12 @@ export function formatSingleDate(
   if (!date) return fallback
   return format(date, 'dd/MM/yyyy')
 }
+
+export function formatDateString(
+  date: string,
+  fallback: string = ''
+): string {
+  if (!date) return fallback;
+  const d = typeof date === 'string' ? new Date(date) : date;
+  return format(d, 'dd/MM/yyyy');
+}

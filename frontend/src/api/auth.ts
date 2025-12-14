@@ -45,6 +45,18 @@ export const authApi = {
     localStorage.removeItem('refresh_token')
   },
 
+  // Refresh access token
+  refresh: async (): Promise<string> => {
+    const refreshToken = authApi.getRefreshToken()
+    if (!refreshToken) {
+      throw new Error('No refresh token')
+    }
+    const response = await api.post('/refresh', { refresh_token: refreshToken })
+    const { access_token, refresh_token: newRefreshToken } = response.data
+    authApi.setTokens(access_token, newRefreshToken)
+    return access_token
+  },
+
   // Logout
   logout: () => {
     authApi.clearTokens()

@@ -22,10 +22,21 @@ api.interceptors.request.use((config) => {
 
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      authApi.clearTokens()
-      window.location.href = '/login'
+  async (error) => {
+    const originalRequest = error.config
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true
+
+      try {
+        const newToken = await authApi.refresh()
+        originalRequest.headers.Authorization = `Bearer ${newToken}`
+        return api.request(originalRequest)
+      } catch {
+        authApi.clearTokens()
+        // Remove the redirect, let the context handle logout
+        // window.location.href = '/login'
+      }
     }
 
     return Promise.reject(error)
