@@ -3,7 +3,7 @@ name: Deploy Netlify
 on: 
   push:
     branches:
-      - deploy_project
+      - prod
 permissions:
   contents: write
   pull-requests: write
