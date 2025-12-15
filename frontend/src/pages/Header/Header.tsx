@@ -6,16 +6,23 @@ import CustomButton from '../../components/ui/Button/CustomButton/CustomButton'
 import MenuLinks from './MenuLinks/MenuLinks'
 import { menuItems } from './MenuItems/MenuItems'
 import { isFocusPage } from '../../utils/utils'
+import { useTrip } from '../../context/TripContext'
 
 export default function Header() {
   const { isAuthenticated, logout, isLoading } = useAuth()
   const navigate = useNavigate()
   const { pathname } = useLocation()
+  const { tripId } = useTrip()
 
   const handleLogout = () => {
     logout()
     navigate({ to: '/login' })
   }
+
+  // Filter menu items: only show 'Détails du voyage' if tripId exists
+  const filteredMenuItems = menuItems.filter(item => 
+    item.id !== 'details-voyage' || tripId
+  )
 
   if (isLoading) return null
 
@@ -26,7 +33,7 @@ export default function Header() {
         {isAuthenticated && (
           <div className="flex justify-center items-center gap-4">
             <nav className="flex flex-row justify-end items-center gap-4 md:flex xs:hidden">
-              {menuItems.map(item => (
+              {filteredMenuItems.map(item => (
                 <MenuLinks
                   key={item.name}
                   path={item.path}
