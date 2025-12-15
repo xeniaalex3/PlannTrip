@@ -1,11 +1,21 @@
 import CustomButton from '../../components/ui/Button/CustomButton/CustomButton'
 import { useNavigate, useSearch } from '@tanstack/react-router'
 import { Route as ConfirmTripRoute } from '../../routes/confirm-trip'
+import { useTrip } from '../../context/TripContext'
+import { useEffect } from 'react'
 
 export default function ConfirmTrip() {
   const navigate = useNavigate()
   const search = useSearch({ from: ConfirmTripRoute.id })
   const tripId = search.tripId
+  const { setTripId } = useTrip()
+
+  // Set tripId in context when component mounts
+  useEffect(() => {
+    if (tripId) {
+      setTripId(tripId)
+    }
+  }, [tripId, setTripId])
 
   function handleViewDetailsPage() {
     if (tripId) {

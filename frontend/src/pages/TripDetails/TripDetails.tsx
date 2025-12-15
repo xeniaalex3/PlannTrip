@@ -68,7 +68,7 @@ export default function TripDetails() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-full py-10">
-        <Loading />
+        <Loading className="text-zinc-100" />{' '}
         <p className="text-zinc-100 text-lg">Chargement du voyage...</p>
       </div>
     )

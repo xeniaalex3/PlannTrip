@@ -8,8 +8,10 @@ interface TripContextProps {
 export interface TripData {
   tripLocation: string
   eventStartAndEndDates: DateRange | undefined
+  tripId: string | null
   setTripLocation: (dest: string) => void
   setEventStartAndEndDates: (dates: DateRange | undefined) => void
+  setTripId: (id: string | null) => void
 }
 
 const TripContext = createContext<TripData | undefined>(undefined)
@@ -28,6 +30,7 @@ export function TripProvider({ children }: TripContextProps) {
   const [eventStartAndEndDates, setEventStartAndEndDates] = useState<
     DateRange | undefined
   >()
+  const [tripId, setTripId] = useState<string | null>(null)
 
   return (
     <TripContext.Provider
@@ -35,7 +38,9 @@ export function TripProvider({ children }: TripContextProps) {
         tripLocation,
         setTripLocation,
         eventStartAndEndDates,
-        setEventStartAndEndDates
+        setEventStartAndEndDates,
+        tripId,
+        setTripId
       }}
     >
       {children}
