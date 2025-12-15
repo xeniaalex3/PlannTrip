@@ -64,18 +64,11 @@ export default function ConfirmTripModal({
         ends_at: eventStartAndEndDates.to?.toISOString(),
         is_confirmed: true,
         user_id: user.id,
-        participants: [
-          {
-            name,
-            email,
-            is_owner: true
-          },
-          ...emailsToInvite.map(guestEmail => ({
-            name: '',
-            email: guestEmail,
-            is_owner: false
-          }))
-        ]
+        participants: emailsToInvite.map(guestEmail => ({
+          name: '',
+          email: guestEmail,
+          is_owner: false
+        }))
       })
 
       const tripId = response.data.id
@@ -102,7 +95,7 @@ export default function ConfirmTripModal({
           <span className="font-semibold text-zinc-100">{tripLocation}</span> ,
           du{' '}
           <span className="font-semibold text-zinc-100">{formattedDates}</span>,
-          remplissez vos coordonnées ci-dessous :
+          vérifiez ou modifiez vos coordonnées ci-dessous :
         </p>
       </div>
       <form
@@ -116,6 +109,7 @@ export default function ConfirmTripModal({
             type="text"
             name="name"
             placeholder="Votre nom complet"
+            defaultValue={user?.firstname || ''}
             className="bg-transparent text-lg placeholder-zinc-400 outline-none w-90"
           />
         </div>
@@ -125,6 +119,7 @@ export default function ConfirmTripModal({
             type="email"
             name="email"
             placeholder="Votre e-mail personnel"
+            defaultValue={user?.email || ''}
             className="bg-transparent text-lg placeholder-zinc-400 outline-none w-90"
           />
         </div>
