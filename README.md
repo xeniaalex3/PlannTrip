@@ -53,14 +53,14 @@ PlannTrip is a web application for planning trips, managing guests, activities, 
 ```
 frontend/
   src/
-    api/ # API client, auth services and hooks
-    assets/ # Images and static assets
-    components/ # UI components and modals
-    context/ # React contexts (auth, global state)
-    pages/ # Main pages (login, register, profile, trips, etc.)
-    routes/ # Routing and protected routes
-    styles/ # Global styles
-    utils/ # Utility and helper functions
+    api/ (API client, auth services and hooks)
+    assets/ (Images and static assets)
+    components/ (UI components and modals)
+    context/ (React contexts (auth, global state))
+    pages/ (Main pages (login, register, profile, trips, etc.))
+    routes/ (Routing and protected routes)
+    styles/ (Global styles)
+    utils/ (Utility and helper functions)
 ```
 
 <br>
