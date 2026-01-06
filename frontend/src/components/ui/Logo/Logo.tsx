@@ -7,9 +7,9 @@ export default function Logo() {
       <img
         src={logo}
         alt="picture of logo"
-        className="h-9 w-9 object-contain"
+        className="xs:max-sm:h-7 xs:max-sm:w-7 sm:max-md:h-9 sm:max-md:w-9 object-contain"
       />
-      <h1 className="text-zinc-50 font-semibold text-3xl relative top-[-4px]">
+      <h1 className="text-zinc-50 font-semibold xs:max-sm:text-2xl sm:max-md:text-3xl relative top-[-4px]">
         plannTrip
       </h1>
     </Link>
