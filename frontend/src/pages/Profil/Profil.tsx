@@ -6,7 +6,7 @@ export default function Profil() {
   return (
     <div className="self-start max-w-6xl lg:w-6xl px-9 py-15 space-y-8">
       <ProfilHeader />
-      <main className="flex flex-row justify-between">
+      <main className="flex flex-row justify-between xs:max-sm:flex-col xs:max-sm:gap-4">
         <InfoContent />
         <ManageAccount />
       </main>

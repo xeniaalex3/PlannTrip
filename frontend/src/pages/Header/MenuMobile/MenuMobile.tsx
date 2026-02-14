@@ -1,6 +1,6 @@
 export default function MenuMobile() {
   return(
-    <div className='sm:max-md:hidden'>
+    <div className='md:hidden'>
       menu mobile
     </div>
   )

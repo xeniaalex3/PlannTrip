@@ -6,7 +6,7 @@ export default function ManageAccount() {
 
   return (
     
-      <div className="shadow-[var(--shadow)] px-4 py-4 w-[45%]">
+      <div className="shadow-[var(--shadow)] px-4 py-4 w-[45%] xs:max-sm:w-full">
         <h1 className="text-lg font-semibold text-zinc-50">Gérer le compte</h1>
         <div className="py-4 flex flex-col gap-3">
           <p className="flex items-center gap-4 text-base text-zinc-400">
