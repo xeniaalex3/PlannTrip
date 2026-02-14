@@ -1,3 +1,5 @@
+import { menuItems } from '../pages/Header/MenuItems/MenuItems'
+
 export interface MenuLinksProps {
   path: string;
   name: string;
@@ -5,4 +7,11 @@ export interface MenuLinksProps {
   focus: boolean;
   pathname: string;
   onClose?: () => void;
+}
+
+export interface MenuDesktopProps {
+  filteredMenuItems: typeof menuItems;
+  pathname: string;
+  handleLogout: () => void;
+  isFocusPage: (pathname: string, page: string) => boolean;
 }

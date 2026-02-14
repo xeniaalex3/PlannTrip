@@ -6,7 +6,7 @@ export default function InfoContent() {
   const { user } = useAuth()
 
   return (
-    <div className="shadow-[var(--shadow)] px-4 py-4 w-[45%]">
+    <div className="shadow-[var(--shadow)] px-4 py-4 w-[45%] xs:max-sm:w-full">
       <h1 className="text-lg font-semibold text-zinc-50">
         Informations de base
       </h1>
